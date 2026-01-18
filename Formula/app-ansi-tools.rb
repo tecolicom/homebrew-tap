@@ -9,13 +9,15 @@ class AppAnsiTools < Formula
   depends_on "tecolicom/tap/app-ansicolumn"
   depends_on "tecolicom/tap/app-ansifold"
   depends_on "tecolicom/tap/app-ansiecho"
+  depends_on "tecolicom/tap/text-ansi-printf"
 
   def install
     (prefix/"README").write <<~EOS
       This is a meta-package that installs all ANSI tools:
       - ansicolumn, ansicolrm, ansicut (from app-ansicolumn)
       - ansifold (from app-ansifold)
-      - ansiecho, ansiprintf (from app-ansiecho)
+      - ansiecho (from app-ansiecho)
+      - ansiprintf (from text-ansi-printf)
     EOS
   end
 
