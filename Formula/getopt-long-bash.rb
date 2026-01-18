@@ -14,11 +14,8 @@ class GetoptLongBash < Formula
     system "perl", "cpanm", "--notest", "--installdeps", "."
     system "perl", "cpanm", "--notest", "-l", libexec, "."
 
-    (libexec/"bin").install Dir["#{libexec}/bin/*"]
-    %w[getoptlong getoptlong.sh].each do |cmd|
-      bin.install_symlink libexec/"bin"/cmd
-    end
-    bin.env_script_all_files(libexec/"bin", PERL5LIB: ENV["PERL5LIB"])
+    (bin/"getoptlong").write_env_script(libexec/"bin/getoptlong", PERL5LIB: ENV["PERL5LIB"])
+    bin.install_symlink libexec/"bin/getoptlong.sh"
   end
 
   test do

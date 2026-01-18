@@ -14,11 +14,9 @@ class AppAnsiecho < Formula
     system "perl", "cpanm", "--notest", "--installdeps", "."
     system "perl", "cpanm", "--notest", "-l", libexec, "."
 
-    (libexec/"bin").install Dir["#{libexec}/bin/*"]
     %w[ansiecho ansiprintf].each do |cmd|
-      bin.install_symlink libexec/"bin"/cmd
+      (bin/cmd).write_env_script(libexec/"bin"/cmd, PERL5LIB: ENV["PERL5LIB"])
     end
-    bin.env_script_all_files(libexec/"bin", PERL5LIB: ENV["PERL5LIB"])
   end
 
   test do

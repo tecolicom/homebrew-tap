@@ -14,9 +14,7 @@ class AppGreple < Formula
     system "perl", "cpanm", "--notest", "--installdeps", "."
     system "perl", "cpanm", "--notest", "-l", libexec, "."
 
-    (libexec/"bin").install Dir["#{libexec}/bin/*"]
-    bin.install_symlink Dir["#{libexec}/bin/greple"]
-    bin.env_script_all_files(libexec/"bin", PERL5LIB: ENV["PERL5LIB"])
+    (bin/"greple").write_env_script(libexec/"bin/greple", PERL5LIB: ENV["PERL5LIB"])
   end
 
   test do

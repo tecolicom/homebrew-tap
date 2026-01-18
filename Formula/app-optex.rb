@@ -14,9 +14,7 @@ class AppOptex < Formula
     system "perl", "cpanm", "--notest", "--installdeps", "."
     system "perl", "cpanm", "--notest", "-l", libexec, "."
 
-    (libexec/"bin").install Dir["#{libexec}/bin/*"]
-    bin.install_symlink libexec/"bin/optex"
-    bin.env_script_all_files(libexec/"bin", PERL5LIB: ENV["PERL5LIB"])
+    (bin/"optex").write_env_script(libexec/"bin/optex", PERL5LIB: ENV["PERL5LIB"])
   end
 
   test do
