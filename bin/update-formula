@@ -1,0 +1,81 @@
+#!/bin/bash
+# Update Homebrew formula from CPAN
+# Usage: bin/update-formula <formula-name> ...
+#        bin/update-formula --all
+# Example: bin/update-formula app-greple app-mdee
+#          bin/update-formula --all
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+update_formula() {
+    local FORMULA=$1
+    local FORMULA_FILE="Formula/${FORMULA}.rb"
+
+    if [[ ! -f "$FORMULA_FILE" ]]; then
+        echo "Error: $FORMULA_FILE not found"
+        return 1
+    fi
+
+    # Extract CPAN dist name from URL in formula
+    local CPAN_DIST=$(grep -E '^\s*url\s+"' "$FORMULA_FILE" | sed -E 's|.*/([^/]+)-[0-9v.]+\.tar\.gz.*|\1|')
+
+    if [[ -z "$CPAN_DIST" ]]; then
+        echo "Skipping $FORMULA (no CPAN URL found)"
+        return 0
+    fi
+
+    echo "=== $FORMULA (CPAN: $CPAN_DIST) ==="
+
+    local INFO=$(curl -s "https://fastapi.metacpan.org/v1/release/$CPAN_DIST")
+    local VERSION=$(echo "$INFO" | jq -r '.version')
+    local URL=$(echo "$INFO" | jq -r '.download_url')
+
+    if [[ "$VERSION" == "null" || "$URL" == "null" ]]; then
+        echo "Error: Could not fetch info for $CPAN_DIST"
+        return 1
+    fi
+
+    # Get current version
+    local CURRENT_VERSION=$(grep -E '^\s*url\s+"' "$FORMULA_FILE" | sed -E 's/.*-([0-9v.]+)\.tar\.gz.*/\1/')
+
+    if [[ "$CURRENT_VERSION" == "$VERSION" ]]; then
+        echo "Already up to date ($VERSION)"
+        echo ""
+        return 0
+    fi
+
+    echo "Updating: $CURRENT_VERSION -> $VERSION"
+
+    local SHA256=$(curl -sL "$URL" | shasum -a 256 | cut -d' ' -f1)
+
+    sed -i '' "s|url \".*\"|url \"$URL\"|" "$FORMULA_FILE"
+    sed -i '' "s|sha256 \".*\"|sha256 \"$SHA256\"|" "$FORMULA_FILE"
+
+    echo "Updated $FORMULA_FILE"
+    echo ""
+}
+
+# Main
+if [[ $# -eq 0 ]]; then
+    echo "Usage: $0 <formula-name> ..."
+    echo "       $0 --all"
+    exit 1
+fi
+
+if [[ "$1" == "--all" ]]; then
+    for f in Formula/*.rb; do
+        formula=$(basename "$f" .rb)
+        update_formula "$formula" || true
+    done
+else
+    for formula in "$@"; do
+        update_formula "$formula"
+    done
+fi
+
+echo "Done. To commit changes:"
+echo "  git add Formula/"
+echo "  git commit -m 'Update formulas'"
+echo "  git push"
