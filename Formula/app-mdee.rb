@@ -5,7 +5,7 @@ class AppMdee < Formula
   sha256 "bcf619e0f594f084242221489acbf90e2fcd1e84677b0159b82ef6a678ab7a07"
   license "MIT"
 
-  depends_on "cpanminus" => :build
+  depends_on "cpanminus"
   depends_on "perl"
 
   def install
