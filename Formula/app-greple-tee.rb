@@ -19,6 +19,7 @@ class AppGrepleTee < Formula
   end
 
   test do
-    system Formula["app-greple"].opt_bin/"greple", "-Mtee", "--version"
+    ENV["PERL5LIB"] = libexec/"lib/perl5"
+    pipe_output("#{Formula["app-greple"].opt_bin}/greple -Mtee -e test", "test\n", 0)
   end
 end

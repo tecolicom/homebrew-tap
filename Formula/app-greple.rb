@@ -23,6 +23,6 @@ class AppGreple < Formula
   end
 
   test do
-    system bin/"greple", "--version"
+    pipe_output("#{bin}/greple -e test", "test\n", 0)
   end
 end
