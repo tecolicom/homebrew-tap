@@ -6,6 +6,7 @@ class AppMdee < Formula
   license "MIT"
 
   depends_on "tecolicom/tap/app-greple"
+  depends_on "tecolicom/tap/app-greple-tee"
   depends_on "tecolicom/tap/app-ansicolumn"
   depends_on "tecolicom/tap/app-ansifold"
   depends_on "tecolicom/tap/app-ansiecho"
@@ -18,7 +19,7 @@ class AppMdee < Formula
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
 
     # Add dependent formulae's PERL5LIB paths
-    %w[app-greple app-ansicolumn app-ansifold app-ansiecho app-nup getopt-long-bash].each do |dep|
+    %w[app-greple app-greple-tee app-ansicolumn app-ansifold app-ansiecho app-nup getopt-long-bash].each do |dep|
       ENV.prepend_path "PERL5LIB", Formula[dep].opt_libexec/"lib/perl5"
     end
 
