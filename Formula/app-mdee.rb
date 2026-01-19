@@ -24,8 +24,8 @@ class AppMdee < Formula
     end
 
     system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
-    system "perl", "cpanm", "--notest", "--installdeps", "."
-    system "perl", "cpanm", "--notest", "-l", libexec, "."
+    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
+    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
     (bin/"mdee").write_env_script(libexec/"bin/mdee", PERL5LIB: ENV["PERL5LIB"])
   end
