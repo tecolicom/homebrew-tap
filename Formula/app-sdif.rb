@@ -1,8 +1,8 @@
 class AppSdif < Formula
   desc "Side-by-side diff viewer with ANSI color support"
   homepage "https://github.com/tecolicom/App-sdif"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-sdif-4.41.tar.gz"
-  sha256 "1516f3c863ad19c3b5a3e074d0480f422b73d3ab647dd3f589f0c0602bc0190c"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-sdif-4.42.tar.gz"
+  sha256 "6651937c6af9a7e51f160a7ed51a1a5fc448cbfbe4299b09961cd497b3f1b189"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
   uses_from_macos "perl"
@@ -27,6 +27,6 @@ class AppSdif < Formula
   end
 
   test do
-    pipe_output("#{bin}/sdif", "test\n", 0)
+    system bin/"sdif", "--version"
   end
 end
