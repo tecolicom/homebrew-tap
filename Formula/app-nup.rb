@@ -14,7 +14,12 @@ class AppNup < Formula
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
-    (bin/"nup").write_env_script(libexec/"bin/nup", PERL5LIB: ENV["PERL5LIB"])
+    (bin/"nup").write <<~SH
+      #!/bin/bash
+      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      exec "#{libexec}/bin/nup" "$@"
+    SH
+    (bin/"nup").chmod 0755
   end
 
   test do

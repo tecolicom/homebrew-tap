@@ -15,7 +15,12 @@ class AppAnsicolumn < Formula
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
     %w[ansicolumn ansicolrm ansicut].each do |cmd|
-      (bin/cmd).write_env_script(libexec/"bin"/cmd, PERL5LIB: ENV["PERL5LIB"])
+      (bin/cmd).write <<~SH
+        #!/bin/bash
+        export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+        exec "#{libexec}/bin/#{cmd}" "$@"
+      SH
+      (bin/cmd).chmod 0755
     end
   end
 

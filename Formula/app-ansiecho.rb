@@ -14,7 +14,12 @@ class AppAnsiecho < Formula
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
-    (bin/"ansiecho").write_env_script(libexec/"bin/ansiecho", PERL5LIB: ENV["PERL5LIB"])
+    (bin/"ansiecho").write <<~SH
+      #!/bin/bash
+      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      exec "#{libexec}/bin/ansiecho" "$@"
+    SH
+    (bin/"ansiecho").chmod 0755
   end
 
   test do

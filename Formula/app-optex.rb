@@ -14,7 +14,12 @@ class AppOptex < Formula
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
-    (bin/"optex").write_env_script(libexec/"bin/optex", PERL5LIB: ENV["PERL5LIB"])
+    (bin/"optex").write <<~SH
+      #!/bin/bash
+      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      exec "#{libexec}/bin/optex" "$@"
+    SH
+    (bin/"optex").chmod 0755
   end
 
   test do

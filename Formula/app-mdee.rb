@@ -27,7 +27,12 @@ class AppMdee < Formula
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
-    (bin/"mdee").write_env_script(libexec/"bin/mdee", PERL5LIB: ENV["PERL5LIB"])
+    (bin/"mdee").write <<~SH
+      #!/bin/bash
+      export PERL5LIB="#{ENV["PERL5LIB"]}${PERL5LIB:+:$PERL5LIB}"
+      exec "#{libexec}/bin/mdee" "$@"
+    SH
+    (bin/"mdee").chmod 0755
   end
 
   test do

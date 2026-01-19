@@ -14,7 +14,12 @@ class TextAnsiPrintf < Formula
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
-    (bin/"ansiprintf").write_env_script(libexec/"bin/ansiprintf", PERL5LIB: ENV["PERL5LIB"])
+    (bin/"ansiprintf").write <<~SH
+      #!/bin/bash
+      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      exec "#{libexec}/bin/ansiprintf" "$@"
+    SH
+    (bin/"ansiprintf").chmod 0755
   end
 
   test do

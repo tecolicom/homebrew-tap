@@ -14,7 +14,12 @@ class AppGreple < Formula
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
-    (bin/"greple").write_env_script(libexec/"bin/greple", PERL5LIB: ENV["PERL5LIB"])
+    (bin/"greple").write <<~SH
+      #!/bin/bash
+      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      exec "#{libexec}/bin/greple" "$@"
+    SH
+    (bin/"greple").chmod 0755
   end
 
   test do

@@ -14,7 +14,12 @@ class GetoptLongBash < Formula
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
-    (bin/"getoptlong").write_env_script(libexec/"bin/getoptlong", PERL5LIB: ENV["PERL5LIB"])
+    (bin/"getoptlong").write <<~SH
+      #!/bin/bash
+      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      exec "#{libexec}/bin/getoptlong" "$@"
+    SH
+    (bin/"getoptlong").chmod 0755
     bin.install_symlink libexec/"bin/getoptlong.sh"
   end
 

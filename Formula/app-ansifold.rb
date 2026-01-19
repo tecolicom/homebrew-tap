@@ -14,7 +14,12 @@ class AppAnsifold < Formula
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
-    (bin/"ansifold").write_env_script(libexec/"bin/ansifold", PERL5LIB: ENV["PERL5LIB"])
+    (bin/"ansifold").write <<~SH
+      #!/bin/bash
+      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      exec "#{libexec}/bin/ansifold" "$@"
+    SH
+    (bin/"ansifold").chmod 0755
   end
 
   test do
