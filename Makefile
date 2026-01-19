@@ -14,6 +14,7 @@ help:
 	@echo "  make clean   - Uninstall all formulas"
 	@echo ""
 	@echo "Single formula:"
+	@echo "  make <name>        - Audit, build, test single formula"
 	@echo "  make sync-<name>   - Sync single formula"
 	@echo "  make audit-<name>  - Audit single formula"
 	@echo "  make build-<name>  - Build single formula"
@@ -49,6 +50,9 @@ clean:
 	done
 
 # Single formula targets
+%: audit-% build-% test-%
+	@echo "==> Done: $*"
+
 sync-%:
 	cp Formula/$*.rb $(TAP_DIR)/Formula/
 
