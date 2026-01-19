@@ -20,6 +20,8 @@ class AppAnsiecho < Formula
       exec "#{libexec}/bin/ansiecho" "$@"
     SH
     (bin/"ansiecho").chmod 0755
+
+    man1.install libexec/"man/man1/ansiecho.1"
   end
 
   test do

@@ -21,6 +21,8 @@ class GetoptLongBash < Formula
     SH
     (bin/"getoptlong").chmod 0755
     bin.install_symlink libexec/"bin/getoptlong.sh"
+
+    man1.install Dir[libexec/"man/man1/getoptlong*.1"]
   end
 
   test do

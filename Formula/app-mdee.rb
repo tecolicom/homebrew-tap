@@ -33,6 +33,8 @@ class AppMdee < Formula
       exec "#{libexec}/bin/mdee" "$@"
     SH
     (bin/"mdee").chmod 0755
+
+    man1.install Dir[libexec/"man/man1/*"]
   end
 
   test do

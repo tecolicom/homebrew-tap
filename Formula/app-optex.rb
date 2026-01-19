@@ -20,6 +20,8 @@ class AppOptex < Formula
       exec "#{libexec}/bin/optex" "$@"
     SH
     (bin/"optex").chmod 0755
+
+    man1.install libexec/"man/man1/optex.1"
   end
 
   test do

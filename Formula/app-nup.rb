@@ -20,6 +20,8 @@ class AppNup < Formula
       exec "#{libexec}/bin/nup" "$@"
     SH
     (bin/"nup").chmod 0755
+
+    man1.install libexec/"man/man1/nup.1"
   end
 
   test do

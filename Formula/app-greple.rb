@@ -20,6 +20,8 @@ class AppGreple < Formula
       exec "#{libexec}/bin/greple" "$@"
     SH
     (bin/"greple").chmod 0755
+
+    man1.install libexec/"man/man1/greple.1"
   end
 
   test do

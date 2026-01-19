@@ -22,6 +22,8 @@ class AppAnsicolumn < Formula
       SH
       (bin/cmd).chmod 0755
     end
+
+    man1.install libexec/"man/man1/ansicolumn.1"
   end
 
   test do

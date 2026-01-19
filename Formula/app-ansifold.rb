@@ -20,6 +20,8 @@ class AppAnsifold < Formula
       exec "#{libexec}/bin/ansifold" "$@"
     SH
     (bin/"ansifold").chmod 0755
+
+    man1.install libexec/"man/man1/ansifold.1"
   end
 
   test do

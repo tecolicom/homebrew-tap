@@ -20,6 +20,8 @@ class TextAnsiPrintf < Formula
       exec "#{libexec}/bin/ansiprintf" "$@"
     SH
     (bin/"ansiprintf").chmod 0755
+
+    man1.install libexec/"man/man1/ansiprintf.1"
   end
 
   test do

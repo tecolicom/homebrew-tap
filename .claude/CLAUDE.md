@@ -42,6 +42,16 @@ SH
 (bin/"cmd").chmod 0755
 ```
 
+### man ページ
+- `libexec/man/man1/` に生成される
+- 各コマンドの man ページのみをインストール（依存のものは除く）
+
+```ruby
+man1.install libexec/"man/man1/cmd.1"
+# または複数の場合
+man1.install Dir[libexec/"man/man1/cmd*.1"]
+```
+
 ### cpanm オプション
 - `--quiet` で警告を抑制
 - `-l libexec` を `--installdeps` にも指定（一時ディレクトリへのインストールを防ぐ）
