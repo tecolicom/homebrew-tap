@@ -16,7 +16,11 @@ class AppGreple < Formula
 
     (bin/"greple").write <<~SH
       #!/bin/bash
-      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      PERL5LIB="#{libexec}/lib/perl5"
+      for dir in "#{HOMEBREW_PREFIX}/opt"/app-greple-*/libexec/lib/perl5; do
+        [ -d "$dir" ] && PERL5LIB="$dir:$PERL5LIB"
+      done
+      export PERL5LIB
       exec "#{libexec}/bin/greple" "$@"
     SH
     (bin/"greple").chmod 0755
