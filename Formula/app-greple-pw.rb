@@ -10,14 +10,16 @@ class AppGreplePw < Formula
   uses_from_macos "perl"
 
   def install
-    ENV.prepend_create_path "PERL5LIB", HOMEBREW_PREFIX/"lib/greple/lib/perl5"
+    ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
+    ENV.prepend_path "PERL5LIB", Formula["app-greple"].opt_libexec/"lib/perl5"
 
     system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
-    system "perl", "cpanm", "--quiet", "--notest", "-l", HOMEBREW_PREFIX/"lib/greple", "--installdeps", "."
-    system "perl", "cpanm", "--quiet", "--notest", "-l", HOMEBREW_PREFIX/"lib/greple", "."
+    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
+    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
   end
 
   test do
+    ENV["PERL5LIB"] = libexec/"lib/perl5"
     system Formula["app-greple"].opt_bin/"greple", "-Mpw", "--exit=0", "test", File::NULL
   end
 end
