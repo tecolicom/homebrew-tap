@@ -8,20 +8,25 @@ class AppGreple < Formula
   uses_from_macos "perl"
 
   def install
-    ENV.prepend_create_path "PERL5LIB", lib/"greple/lib/perl5"
+    ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
 
     system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
-    system "perl", "cpanm", "--quiet", "--notest", "-l", lib/"greple", "--installdeps", "."
-    system "perl", "cpanm", "--quiet", "--notest", "-l", lib/"greple", "."
+    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
+    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
     (bin/"greple").write <<~SH
       #!/bin/bash
-      export PERL5LIB="#{HOMEBREW_PREFIX}/lib/greple/lib/perl5"
-      exec "#{HOMEBREW_PREFIX}/lib/greple/bin/greple" "$@"
+      PERL5LIB="#{libexec}/lib/perl5"
+      for mod in charcode frame git jq l msdoc pw stripe subst tee type under update wordle xlate xp; do
+        dir="#{HOMEBREW_PREFIX}/opt/app-greple-${mod}/libexec/lib/perl5"
+        [ -d "$dir" ] && PERL5LIB="$dir:$PERL5LIB"
+      done
+      export PERL5LIB
+      exec "#{libexec}/bin/greple" "$@"
     SH
     (bin/"greple").chmod 0755
 
-    man1.install lib/"greple/man/man1/greple.1"
+    man1.install libexec/"man/man1/greple.1"
   end
 
   test do
