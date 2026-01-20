@@ -16,8 +16,7 @@ class AppGreple < Formula
     (bin/"greple").write <<~SH
       #!/bin/bash
       GREPLE_LIB="#{HOMEBREW_PREFIX}/opt/app-greple/libexec/lib/perl5"
-      for mod in charcode frame git jq l msdoc pw stripe subst tee type under update wordle xlate xp; do
-        dir="#{HOMEBREW_PREFIX}/opt/app-greple-${mod}/libexec/lib/perl5"
+      for dir in "#{HOMEBREW_PREFIX}/opt"/app-greple-*/libexec/lib/perl5; do
         [ -d "$dir" ] && GREPLE_LIB="$dir:$GREPLE_LIB"
       done
       export PERL5LIB="$GREPLE_LIB${PERL5LIB:+:$PERL5LIB}"
