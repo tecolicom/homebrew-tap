@@ -27,7 +27,6 @@ class AppGrepleTools < Formula
   end
 
   test do
-    ENV["PERL5LIB"] = Formula["app-greple-frame"].opt_libexec/"lib/perl5"
     pipe_output("#{Formula["app-greple"].opt_bin}/greple -Mframe -e test", "test\n", 0)
   end
 end
