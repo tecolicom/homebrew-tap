@@ -5,10 +5,19 @@ class AppNup < Formula
   sha256 "10efdae9d14a2511550a9b3579873de8cfc0ec292fe2dceaa33c53b17893e5f7"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
+  depends_on "tecolicom/tap/app-ansicolumn"
+  depends_on "tecolicom/tap/app-optex"
+  depends_on "tecolicom/tap/getoptlong-bash"
+
   uses_from_macos "perl"
 
   def install
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
+
+    # Add dependent formulae's PERL5LIB paths
+    %w[app-ansicolumn app-optex getoptlong-bash].each do |dep|
+      ENV.prepend_path "PERL5LIB", Formula[dep].opt_libexec/"lib/perl5"
+    end
 
     system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
@@ -16,7 +25,7 @@ class AppNup < Formula
 
     (bin/"nup").write <<~SH
       #!/bin/bash
-      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      export PERL5LIB="#{ENV["PERL5LIB"]}${PERL5LIB:+:$PERL5LIB}"
       exec "#{libexec}/bin/nup" "$@"
     SH
     (bin/"nup").chmod 0755

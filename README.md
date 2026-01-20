@@ -43,7 +43,7 @@ brew tap tecolicom/tap
 
 | Formula | Commands | Description |
 |---------|----------|-------------|
-| [getopt-long-bash](https://github.com/tecolicom/Getopt-Long-Bash) | `getoptlong`, `getoptlong.sh` | Getopt::Long style option parser for Bash |
+| [getoptlong-bash](https://github.com/tecolicom/Getopt-Long-Bash) | `getoptlong`, `getoptlong.sh` | Getopt::Long style option parser for Bash |
 
 ## Usage Examples
 
