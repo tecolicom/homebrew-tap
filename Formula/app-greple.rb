@@ -11,7 +11,6 @@ class AppGreple < Formula
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
 
     system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
-    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
     system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
 
     (bin/"greple").write <<~SH
