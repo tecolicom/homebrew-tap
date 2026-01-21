@@ -5,6 +5,8 @@ class AppMdee < Formula
   sha256 "f432302a403e04e970cef0ef811dfd6a5719fab784fe10d65b3ef7272cd10bb0"
   license "MIT"
 
+  depends_on "cpanminus" => :build
+  depends_on "perl"
   depends_on "tecolicom/tap/app-ansicolumn"
   depends_on "tecolicom/tap/app-ansiecho"
   depends_on "tecolicom/tap/app-ansifold"
@@ -12,8 +14,6 @@ class AppMdee < Formula
   depends_on "tecolicom/tap/app-greple-tee"
   depends_on "tecolicom/tap/app-nup"
   depends_on "tecolicom/tap/getoptlong-bash"
-
-  uses_from_macos "perl"
 
   def install
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
@@ -23,9 +23,7 @@ class AppMdee < Formula
       ENV.prepend_path "PERL5LIB", Formula[dep].opt_libexec/"lib/perl5"
     end
 
-    system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
-    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
-    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
+    system "cpanm", "--notest", "-l", libexec, "."
 
     (bin/"mdee").write <<~SH
       #!/bin/bash

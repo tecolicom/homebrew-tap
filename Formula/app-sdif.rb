@@ -5,14 +5,12 @@ class AppSdif < Formula
   sha256 "6651937c6af9a7e51f160a7ed51a1a5fc448cbfbe4299b09961cd497b3f1b189"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
-  uses_from_macos "perl"
+  depends_on "cpanminus" => :build
+  depends_on "perl"
 
   def install
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-
-    system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
-    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "--installdeps", "."
-    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
+    system "cpanm", "--notest", "-l", libexec, "."
 
     %w[sdif cdif watchdiff].each do |cmd|
       (bin/cmd).write <<~SH
