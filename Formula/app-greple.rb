@@ -9,9 +9,20 @@ class AppGreple < Formula
   depends_on "perl"
 
   def install
-    system "cpanm", "--notest", "--installdeps", "."
+    ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
     system "cpanm", "--notest", "-l", libexec, "."
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+
+    (bin/"greple").write <<~SH
+      #!/bin/bash
+      GREPLE_LIB="#{HOMEBREW_PREFIX}/opt/app-greple/libexec/lib/perl5"
+      for dir in "#{HOMEBREW_PREFIX}/opt"/app-greple-*/libexec/lib/perl5; do
+        [ -d "$dir" ] && GREPLE_LIB="$dir:$GREPLE_LIB"
+      done
+      export PERL5LIB="$GREPLE_LIB${PERL5LIB:+:$PERL5LIB}"
+      exec "#{HOMEBREW_PREFIX}/opt/app-greple/libexec/bin/greple" "$@"
+    SH
+    (bin/"greple").chmod 0755
+
     man1.install libexec/"man/man1/greple.1"
   end
 

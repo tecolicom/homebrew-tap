@@ -10,7 +10,8 @@ class AppGrepleJq < Formula
   depends_on "tecolicom/tap/app-greple"
 
   def install
-    system "cpanm", "--notest", "--installdeps", "."
+    ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
+    ENV.prepend_path "PERL5LIB", Formula["app-greple"].opt_libexec/"lib/perl5"
     system "cpanm", "--notest", "-l", libexec, "."
   end
 
