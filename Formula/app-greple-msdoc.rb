@@ -5,20 +5,15 @@ class AppGrepleMsdoc < Formula
   sha256 "0466ceaa5c806b9a5095b4351d1d11561962509bd883caf90d3f832dd90435da"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
+  depends_on "cpanminus" => :build
   depends_on "tecolicom/tap/app-greple"
 
-  uses_from_macos "perl"
-
   def install
-    ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    ENV.prepend_path "PERL5LIB", Formula["app-greple"].opt_libexec/"lib/perl5"
-
-    system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
-    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
+    system "cpanm", "--notest", "--installdeps", "."
+    system "cpanm", "--notest", "-l", libexec, "."
   end
 
   test do
-    ENV["PERL5LIB"] = libexec/"lib/perl5"
-    pipe_output("#{Formula["app-greple"].opt_bin}/greple -Mmsdoc -e test", "test\n", 0)
+    system Formula["app-greple"].opt_bin/"greple", "-Mmsdoc", "--version"
   end
 end

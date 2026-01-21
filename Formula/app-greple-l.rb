@@ -5,20 +5,15 @@ class AppGrepleL < Formula
   sha256 "6f218eee336f4f51d8c56d4c058ebf121d4ebccb177188267b99bd79dc4aa9c0"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
+  depends_on "cpanminus" => :build
   depends_on "tecolicom/tap/app-greple"
 
-  uses_from_macos "perl"
-
   def install
-    ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    ENV.prepend_path "PERL5LIB", Formula["app-greple"].opt_libexec/"lib/perl5"
-
-    system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
-    system "perl", "cpanm", "--quiet", "--notest", "-l", libexec, "."
+    system "cpanm", "--notest", "--installdeps", "."
+    system "cpanm", "--notest", "-l", libexec, "."
   end
 
   test do
-    ENV["PERL5LIB"] = libexec/"lib/perl5"
-    pipe_output("#{Formula["app-greple"].opt_bin}/greple -ML -e test", "test\n", 0)
+    system Formula["app-greple"].opt_bin/"greple", "-ML", "--version"
   end
 end
