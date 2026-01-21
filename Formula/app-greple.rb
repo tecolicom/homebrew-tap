@@ -18,7 +18,7 @@ class AppGreple < Formula
       for dir in "#{HOMEBREW_PREFIX}/opt"/app-greple-*/libexec/lib/perl5; do
         [ -d "$dir" ] && GREPLE_LIB="$dir:$GREPLE_LIB"
       done
-      export PERL5LIB="$GREPLE_LIB"
+      export PERL5LIB="$GREPLE_LIB${PERL5LIB:+:$PERL5LIB}"
       exec "#{HOMEBREW_PREFIX}/opt/app-greple/libexec/bin/greple" "$@"
     SH
     (bin/"greple").chmod 0755
