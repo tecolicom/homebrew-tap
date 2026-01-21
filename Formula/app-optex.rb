@@ -5,12 +5,12 @@ class AppOptex < Formula
   sha256 "4443ae9e0774b9a18da54adf7af8224f360b53ce3b9395559156701c999c0287"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
-  depends_on "cpanminus" => :build
-  depends_on "perl"
+  uses_from_macos "perl"
 
   def install
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    system "cpanm", "--notest", "-l", libexec, "."
+    system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
+    system "perl", "cpanm", "--notest", "-l", libexec, "."
 
     (bin/"optex").write <<~SH
       #!/bin/bash

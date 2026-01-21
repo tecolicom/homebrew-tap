@@ -5,12 +5,12 @@ class AppAnsifold < Formula
   sha256 "57ad9ae2318822f57be973458e1c082f48e89c564ed6e712f523567af81148b9"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
-  depends_on "cpanminus" => :build
-  depends_on "perl"
+  uses_from_macos "perl"
 
   def install
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    system "cpanm", "--notest", "-l", libexec, "."
+    system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
+    system "perl", "cpanm", "--notest", "-l", libexec, "."
 
     (bin/"ansifold").write <<~SH
       #!/bin/bash

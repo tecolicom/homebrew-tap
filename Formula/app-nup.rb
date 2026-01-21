@@ -5,8 +5,7 @@ class AppNup < Formula
   sha256 "10efdae9d14a2511550a9b3579873de8cfc0ec292fe2dceaa33c53b17893e5f7"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
-  depends_on "cpanminus" => :build
-  depends_on "perl"
+  uses_from_macos "perl"
   depends_on "tecolicom/tap/app-ansicolumn"
   depends_on "tecolicom/tap/app-optex"
   depends_on "tecolicom/tap/getoptlong-bash"
@@ -19,7 +18,8 @@ class AppNup < Formula
       ENV.prepend_path "PERL5LIB", Formula[dep].opt_libexec/"lib/perl5"
     end
 
-    system "cpanm", "--notest", "-l", libexec, "."
+    system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
+    system "perl", "cpanm", "--notest", "-l", libexec, "."
 
     (bin/"nup").write <<~SH
       #!/bin/bash

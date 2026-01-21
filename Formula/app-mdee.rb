@@ -5,8 +5,7 @@ class AppMdee < Formula
   sha256 "f432302a403e04e970cef0ef811dfd6a5719fab784fe10d65b3ef7272cd10bb0"
   license "MIT"
 
-  depends_on "cpanminus" => :build
-  depends_on "perl"
+  uses_from_macos "perl"
   depends_on "tecolicom/tap/app-ansicolumn"
   depends_on "tecolicom/tap/app-ansiecho"
   depends_on "tecolicom/tap/app-ansifold"
@@ -23,7 +22,8 @@ class AppMdee < Formula
       ENV.prepend_path "PERL5LIB", Formula[dep].opt_libexec/"lib/perl5"
     end
 
-    system "cpanm", "--notest", "-l", libexec, "."
+    system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
+    system "perl", "cpanm", "--notest", "-l", libexec, "."
 
     (bin/"mdee").write <<~SH
       #!/bin/bash
