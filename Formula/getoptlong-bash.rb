@@ -5,12 +5,13 @@ class GetoptlongBash < Formula
   sha256 "edee0e97f9346ea42fd8865b050d510416c46b0a67a3f6cb7b6448d93e56781f"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
+  depends_on "cpanminus"
+
   uses_from_macos "perl"
 
   def install
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    system "curl", "-sL", "https://cpanmin.us", "-o", "cpanm"
-    system "perl", "cpanm", "--notest", "-l", libexec, "."
+    system "cpanm", "--notest", "-l", libexec, "."
 
     (bin/"getoptlong").write <<~SH
       #!/bin/bash
