@@ -12,14 +12,16 @@ class AppAnsifold < Formula
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
     system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
-    (bin/"ansifold").write <<~SH
-      #!/bin/bash
-      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
-      exec "#{libexec}/bin/ansifold" "$@"
-    SH
-    (bin/"ansifold").chmod 0755
+    %w[ansifold ansicut ansicolrm].each do |cmd|
+      (bin/cmd).write <<~SH
+        #!/bin/bash
+        export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+        exec "#{libexec}/bin/#{cmd}" "$@"
+      SH
+      (bin/cmd).chmod 0755
+    end
 
-    man1.install libexec/"man/man1/ansifold.1"
+    man1.install Dir[libexec/"man/man1/{ansifold,ansicut,ansicolrm}.1"]
   end
 
   test do

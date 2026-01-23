@@ -13,9 +13,19 @@ class AppGrepleXlate < Formula
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
     ENV.prepend_path "PERL5LIB", Formula["app-greple"].opt_libexec/"lib/perl5"
     system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
+
+    (bin/"xlate").write <<~SH
+      #!/bin/bash
+      export PERL5LIB="#{libexec}/lib/perl5:#{Formula["app-greple"].opt_libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      exec "#{libexec}/bin/xlate" "$@"
+    SH
+    (bin/"xlate").chmod 0755
+
+    man1.install libexec/"man/man1/xlate.1"
+    man3.install Dir[libexec/"man/man3/App::Greple::xlate*.3"]
   end
 
   test do
-    system Formula["app-greple"].opt_bin/"greple", "-Mxlate", "--version"
+    system bin/"xlate", "--version"
   end
 end
