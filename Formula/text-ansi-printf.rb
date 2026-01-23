@@ -5,13 +5,12 @@ class TextAnsiPrintf < Formula
   sha256 "8be4b96b8a6081e87561725e867b8524b4818290ceb1174156f33aaeac867e46"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
-  depends_on "cpanminus"
+  depends_on "cpm"
 
-  uses_from_macos "perl"
 
   def install
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    system "cpanm", "--notest", "-l", libexec, "."
+    system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
     (bin/"ansiprintf").write <<~SH
       #!/bin/bash

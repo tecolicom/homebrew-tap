@@ -5,7 +5,7 @@ class AppMdee < Formula
   sha256 "f432302a403e04e970cef0ef811dfd6a5719fab784fe10d65b3ef7272cd10bb0"
   license "MIT"
 
-  depends_on "cpanminus"
+  depends_on "cpm"
   depends_on "tecolicom/tap/app-ansicolumn"
   depends_on "tecolicom/tap/app-ansiecho"
   depends_on "tecolicom/tap/app-ansifold"
@@ -14,7 +14,6 @@ class AppMdee < Formula
   depends_on "tecolicom/tap/app-nup"
   depends_on "tecolicom/tap/getoptlong-bash"
 
-  uses_from_macos "perl"
 
   def install
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
@@ -24,7 +23,7 @@ class AppMdee < Formula
       ENV.prepend_path "PERL5LIB", Formula[dep].opt_libexec/"lib/perl5"
     end
 
-    system "cpanm", "--notest", "-l", libexec, "."
+    system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
     (bin/"mdee").write <<~SH
       #!/bin/bash
@@ -33,7 +32,7 @@ class AppMdee < Formula
     SH
     (bin/"mdee").chmod 0755
 
-    man1.install Dir[libexec/"man/man1/*"]
+    man1.install libexec/"man/man1/mdee.1"
   end
 
   test do

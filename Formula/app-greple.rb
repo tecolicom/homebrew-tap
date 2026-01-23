@@ -5,13 +5,12 @@ class AppGreple < Formula
   sha256 "ace2ce01a766c937fb87da72249e0e8534148395e2ea14e9d05a2f80eb5358ce"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
-  depends_on "cpanminus"
+  depends_on "cpm"
 
-  uses_from_macos "perl"
 
   def install
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    system "cpanm", "--notest", "-l", libexec, "."
+    system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
     (bin/"greple").write <<~SH
       #!/bin/bash

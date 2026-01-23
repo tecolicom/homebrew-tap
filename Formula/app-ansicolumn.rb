@@ -5,13 +5,12 @@ class AppAnsicolumn < Formula
   sha256 "4696cd85d8d41fc2c1246b071d138e636d4766e0eb0a112a8273bd7d9af5c90f"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
-  depends_on "cpanminus"
+  depends_on "cpm"
 
-  uses_from_macos "perl"
 
   def install
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    system "cpanm", "--notest", "-l", libexec, "."
+    system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
     %w[ansicolumn ansicolrm ansicut].each do |cmd|
       (bin/cmd).write <<~SH
