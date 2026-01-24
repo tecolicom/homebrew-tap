@@ -1,8 +1,8 @@
 class AppLms < Formula
   desc "Language Model Shell - CLI for LLM interaction"
   homepage "https://github.com/kaz-utashiro/App-lms"
-  url "https://github.com/kaz-utashiro/App-lms/archive/refs/tags/0.11.tar.gz"
-  sha256 "44ddbda44dd4feaf863088f806913ac48f5a3d5d760eeb6156dd6b43ada7cd26"
+  url "https://github.com/kaz-utashiro/App-lms/archive/refs/tags/0.12.tar.gz"
+  sha256 "264ec7b3e32c0f6563b6714b4931d3e44dcd3fe3756a76c716f329771040ed4a"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
   head "https://github.com/kaz-utashiro/App-lms.git", branch: "main"
 
