@@ -12,6 +12,22 @@ class AppGreple < Formula
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
     system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
+    # Install commonly used greple modules (from app-greple-tools)
+    %w[
+      App::Greple::frame
+      App::Greple::git
+      App::Greple::L
+      App::Greple::stripe
+      App::Greple::subst
+      App::Greple::tee
+      App::Greple::type
+      App::Greple::under
+      App::Greple::update
+      App::Greple::xp
+    ].each do |mod|
+      system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, mod
+    end
+
     (bin/"greple").write <<~SH
       #!/bin/bash
       GREPLE_LIB="#{HOMEBREW_PREFIX}/opt/app-greple/libexec/lib/perl5"
@@ -24,6 +40,7 @@ class AppGreple < Formula
     (bin/"greple").chmod 0755
 
     man1.install libexec/"man/man1/greple.1"
+    man3.install Dir[libexec/"man/man3/App::Greple*.3"]
   end
 
   test do

@@ -6,7 +6,7 @@ class AppNup < Formula
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
   depends_on "cpm"
-  depends_on "tecolicom/tap/app-ansicolumn"
+  depends_on "tecolicom/tap/app-ansi-tools"
   depends_on "tecolicom/tap/app-optex"
   depends_on "tecolicom/tap/getoptlong-bash"
 
@@ -15,7 +15,7 @@ class AppNup < Formula
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
 
     # Add dependent formulae's PERL5LIB paths
-    %w[app-ansicolumn app-optex getoptlong-bash].each do |dep|
+    %w[app-ansi-tools app-optex getoptlong-bash].each do |dep|
       ENV.prepend_path "PERL5LIB", Formula[dep].opt_libexec/"lib/perl5"
     end
 

@@ -17,8 +17,7 @@
 TAP_DIR = /opt/homebrew/Library/Taps/tecolicom/homebrew-tap
 FORMULAS = $(wildcard Formula/*.rb)
 NAMES = $(patsubst Formula/%.rb,%,$(FORMULAS))
-META_PACKAGES = app-ansi-tools app-greple-tools
-REGULAR_PACKAGES = $(filter-out $(META_PACKAGES),$(NAMES))
+PACKAGES = $(NAMES)
 
 .PHONY: all sync audit build test clean
 
@@ -34,13 +33,13 @@ audit: sync
 	done
 
 build: sync
-	@for name in $(REGULAR_PACKAGES); do \
+	@for name in $(PACKAGES); do \
 		echo "==> Building $$name"; \
 		brew reinstall --build-from-source tecolicom/tap/$$name || exit 1; \
 	done
 
 test: sync
-	@for name in $(REGULAR_PACKAGES); do \
+	@for name in $(PACKAGES); do \
 		echo "==> Testing $$name"; \
 		brew test tecolicom/tap/$$name || exit 1; \
 	done
