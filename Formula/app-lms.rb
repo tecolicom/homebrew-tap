@@ -6,6 +6,7 @@ class AppLms < Formula
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
   head "https://github.com/kaz-utashiro/App-lms.git", branch: "main"
 
+  depends_on "bat"
   depends_on "cpm"
 
   def install
