@@ -40,7 +40,16 @@ class AppGreple < Formula
     (bin/"greple").chmod 0755
 
     man1.install libexec/"man/man1/greple.1"
-    man3.install Dir[libexec/"man/man3/App::Greple*.3"]
+    # Install man3 pages for UTASHIRO's modules (detected from MYMETA.json)
+    require "json"
+    Dir[libexec/"lib/perl5/**/.meta/*/MYMETA.json"].each do |meta_file|
+      meta = JSON.parse(File.read(meta_file))
+      authors = meta["author"] || []
+      next unless authors.any? { |a| a.include?("Utashiro") }
+      mod_pattern = meta["name"].gsub("-", "::") + "*.3"
+      man_files = Dir[libexec/"man/man3"/mod_pattern]
+      man3.install man_files unless man_files.empty?
+    end
   end
 
   test do
