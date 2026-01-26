@@ -1,8 +1,8 @@
 class AppOptex < Formula
   desc "General-purpose command option wrapper"
   homepage "https://github.com/kaz-utashiro/optex"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-optex-1.05.tar.gz"
-  sha256 "4443ae9e0774b9a18da54adf7af8224f360b53ce3b9395559156701c999c0287"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-optex-1.06.tar.gz"
+  sha256 "7e06288ddf700fba433acecfc57e71cfbb387b0bed17eabaea54d1426b99efbb"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
   depends_on "cpm"
@@ -15,6 +15,7 @@ class AppOptex < Formula
     (bin/"optex").write <<~SH
       #!/bin/bash
       export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      export OPTEX_SCRIPT_PATH="#{HOMEBREW_PREFIX}/bin/optex"
       exec "#{libexec}/bin/optex" "$@"
     SH
     (bin/"optex").chmod 0755
