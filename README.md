@@ -16,51 +16,45 @@ brew tap tecolicom/tap
 |---------|---------|-------------|
 | [app-greple](https://github.com/kaz-utashiro/greple) | `greple` | Extensible grep with lexical expression and region handling |
 | [app-optex](https://github.com/kaz-utashiro/optex) | `optex` | General-purpose command option wrapper |
-| [app-sdif](https://github.com/tecolicom/App-sdif) | `sdif`, `cdif` | Side-by-side diff viewer with ANSI color support |
+| [app-sdif](https://github.com/tecolicom/App-sdif) | `sdif`, `cdif`, `watchdiff` | Side-by-side diff viewer with ANSI color support |
+| [app-cat-v](https://github.com/tecolicom/App-cat-v) | `cat-v` | Visualize non-printing characters |
 
 ### Greple Modules
 
 | Formula | Description |
 |---------|-------------|
 | [app-greple-charcode](https://github.com/kaz-utashiro/greple-charcode) | Character code handling |
-| [app-greple-frame](https://github.com/kaz-utashiro/greple-frame) | Display text in decorative frame |
-| [app-greple-git](https://github.com/kaz-utashiro/greple-git) | Git integration |
 | [app-greple-jq](https://github.com/kaz-utashiro/greple-jq) | JSON processing with jq |
-| [app-greple-l](https://github.com/kaz-utashiro/greple-L) | Line number handling |
 | [app-greple-msdoc](https://github.com/kaz-utashiro/greple-msdoc) | Search Microsoft document files |
 | [app-greple-pw](https://github.com/kaz-utashiro/greple-pw) | Password handling |
-| [app-greple-stripe](https://github.com/kaz-utashiro/greple-stripe) | Striped output |
-| [app-greple-subst](https://github.com/kaz-utashiro/greple-subst) | Text substitution |
-| [app-greple-tee](https://github.com/kaz-utashiro/greple-tee) | Tee matched text to external command |
-| [app-greple-type](https://github.com/kaz-utashiro/greple-type) | File type handling |
-| [app-greple-under](https://github.com/kaz-utashiro/greple-under) | Directory specification |
-| [app-greple-update](https://github.com/kaz-utashiro/greple-update) | Update file content |
+| [app-greple-subst-desumasu](https://github.com/kaz-utashiro/greple-subst-desumasu) | Japanese DESU/MASU dictionary for subst |
 | [app-greple-wordle](https://github.com/kaz-utashiro/greple-wordle) | Wordle game |
 | [app-greple-xlate](https://github.com/kaz-utashiro/App-Greple-xlate) | Translation support |
-| [app-greple-xp](https://github.com/kaz-utashiro/greple-xp) | Extended pattern handling |
-| **app-greple-tools** | *(meta)* Collection of commonly used modules |
 
 ### ANSI Terminal Tools
 
 | Formula | Commands | Description |
 |---------|----------|-------------|
-| [app-ansicolumn](https://github.com/tecolicom/App-ansicolumn) | `ansicolumn`, `ansicolrm`, `ansicut` | ANSI-aware column formatting |
-| [app-ansifold](https://github.com/tecolicom/App-ansifold) | `ansifold` | ANSI-aware text folding |
-| [app-ansiecho](https://github.com/tecolicom/App-ansiecho) | `ansiecho` | Echo with ANSI color support |
-| [text-ansi-printf](https://github.com/tecolicom/Text-ANSI-Printf) | `ansiprintf` | ANSI-aware printf |
-| **app-ansi-tools** | *(meta)* | Installs all ANSI tools above |
+| [app-ansi-tools](https://github.com/tecolicom) | `ansicolumn`, `ansiecho`, `ansifold`, `ansicut`, `ansicolrm`, `ansiprintf` | ANSI terminal sequence aware text processing tools |
 
-### Paged Output
+### Paged Output & Markdown
 
 | Formula | Command | Description |
 |---------|---------|-------------|
 | [app-nup](https://github.com/tecolicom/App-nup) | `nup` | N-up contents-aware page-layout |
+| [app-mdee](https://github.com/tecolicom/App-mdee) | `mdee` | Multi-column Markdown viewer with syntax highlighting |
 
-### Markdown
+### Docker
 
 | Formula | Command | Description |
 |---------|---------|-------------|
-| [app-mdee](https://github.com/tecolicom/App-mdee) | `mdee` | Multi-column Markdown viewer with syntax highlighting |
+| [app-dozo](https://github.com/tecolicom/App-dozo) | `dozo` | Dozo, Docker with Zero Overhead |
+
+### LLM
+
+| Formula | Command | Description |
+|---------|---------|-------------|
+| [app-lms](https://github.com/kaz-utashiro/App-lms) | `lms` | Language Model Shell - CLI for LLM interaction |
 
 ### Shell Utilities
 
@@ -72,8 +66,8 @@ brew tap tecolicom/tap
 
 ```bash
 # Install individual tools
-brew install tecolicom/tap/greple
-brew install tecolicom/tap/app-ansicolumn
+brew install tecolicom/tap/app-greple
+brew install tecolicom/tap/app-sdif
 
 # Install all ANSI tools at once
 brew install tecolicom/tap/app-ansi-tools
