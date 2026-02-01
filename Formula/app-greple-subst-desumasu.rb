@@ -9,6 +9,10 @@ class AppGrepleSubstDesumasu < Formula
   depends_on "tecolicom/tap/app-greple"
 
   def install
+    # Prevent superenv from injecting -mbranch-protection=standard
+    # which causes "Illegal instruction" in Docker on arm64
+    ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
+
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
     ENV.prepend_path "PERL5LIB", Formula["app-greple"].opt_libexec/"lib/perl5"
     system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."

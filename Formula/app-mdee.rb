@@ -11,8 +11,11 @@ class AppMdee < Formula
   depends_on "tecolicom/tap/app-nup"
   depends_on "tecolicom/tap/getoptlong-bash"
 
-
   def install
+    # Prevent superenv from injecting -mbranch-protection=standard
+    # which causes "Illegal instruction" in Docker on arm64
+    ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
+
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
 
     # Add dependent formulae's PERL5LIB paths

@@ -7,8 +7,11 @@ class AppGreple < Formula
 
   depends_on "cpm"
 
-
   def install
+    # Prevent superenv from injecting -mbranch-protection=standard
+    # which causes "Illegal instruction" in Docker on arm64
+    ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
+
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
     system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
@@ -46,6 +49,7 @@ class AppGreple < Formula
       meta = JSON.parse(File.read(meta_file))
       authors = meta["author"] || []
       next unless authors.any? { |a| a.include?("Utashiro") }
+
       mod_pattern = meta["name"].gsub("-", "::") + "*.3"
       man_files = Dir[libexec/"man/man3"/mod_pattern]
       man3.install man_files unless man_files.empty?
