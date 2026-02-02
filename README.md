@@ -54,7 +54,7 @@ brew tap tecolicom/tap
 
 | Formula | Command | Description |
 |---------|---------|-------------|
-| [app-lms](https://github.com/kaz-utashiro/App-lms) | `lms` | Language Model Shell - CLI for LLM interaction |
+| [app-chot](https://github.com/tecolicom/App-chot) | `chot` | CLI tool for quick LLM interaction |
 
 ### Shell Utilities
 
