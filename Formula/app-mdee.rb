@@ -1,8 +1,8 @@
 class AppMdee < Formula
   desc "Multi-column Markdown viewer with syntax highlighting"
   homepage "https://github.com/tecolicom/App-mdee"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-mdee-0.11.tar.gz"
-  sha256 "bac4dca0d9d4c7c2e612234a449f3de15835bc9b702679893343853bcd52341c"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-mdee-0.12.tar.gz"
+  sha256 "f50701601ddfa45716cf64e6cc1f5f191621ecaba2ef6e80e044984dc7d7b8b7"
   license "MIT"
 
   depends_on "cpm"
