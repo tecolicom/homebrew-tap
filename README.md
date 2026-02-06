@@ -50,11 +50,11 @@ brew tap tecolicom/tap
 |---------|---------|-------------|
 | [app-dozo](https://github.com/tecolicom/App-dozo) | `dozo` | Dozo, Docker with Zero Overhead |
 
-### LLM
+### Development Tools
 
 | Formula | Command | Description |
 |---------|---------|-------------|
-| [app-chot](https://github.com/tecolicom/App-chot) | `chot` | CLI tool for quick LLM interaction |
+| [app-chot](https://github.com/tecolicom/App-chot) | `chot` | Locate and display source of commands and libraries |
 
 ### Shell Utilities
 

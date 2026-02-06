@@ -1,5 +1,5 @@
 class AppChot < Formula
-  desc "CLI tool for quick LLM interaction"
+  desc "Locate and display source of commands and libraries"
   homepage "https://github.com/tecolicom/App-chot"
   url "https://github.com/tecolicom/App-chot/archive/refs/tags/1.00.tar.gz"
   sha256 "f10de76570a311d210a1e59017e61f7b9d2b7be8464f676e688fa0ff0b13f3a4"
