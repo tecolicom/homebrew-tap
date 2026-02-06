@@ -1,5 +1,5 @@
 class AppNup < Formula
-  desc "N-up contents-aware page-layout command for paged output"
+  desc "n-up, multi-column paged output for commands and files"
   homepage "https://github.com/tecolicom/App-nup"
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-0.9906.tar.gz"
   sha256 "10efdae9d14a2511550a9b3579873de8cfc0ec292fe2dceaa33c53b17893e5f7"
