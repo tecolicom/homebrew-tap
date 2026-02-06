@@ -27,6 +27,7 @@ class AppNup < Formula
     (bin/"nup").write <<~SH
       #!/bin/bash
       export PERL5LIB="#{ENV["PERL5LIB"]}${PERL5LIB:+:$PERL5LIB}"
+      export PATH="#{libexec}/bin:$PATH"
       exec "#{libexec}/bin/nup" "$@"
     SH
     (bin/"nup").chmod 0755
