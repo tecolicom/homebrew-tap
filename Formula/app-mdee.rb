@@ -1,5 +1,5 @@
 class AppMdee < Formula
-  desc "Multi-column Markdown viewer with syntax highlighting"
+  desc "em·dee, Markdown Easy on the Eyes"
   homepage "https://github.com/tecolicom/App-mdee"
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-mdee-0.12.tar.gz"
   sha256 "f50701601ddfa45716cf64e6cc1f5f191621ecaba2ef6e80e044984dc7d7b8b7"
