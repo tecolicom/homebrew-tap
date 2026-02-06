@@ -21,6 +21,7 @@ class AppDozo < Formula
     (bin/"dozo").write <<~SH
       #!/bin/bash
       export PERL5LIB="#{ENV["PERL5LIB"]}${PERL5LIB:+:$PERL5LIB}"
+      export PATH="#{libexec}/bin:$PATH"
       exec "#{libexec}/bin/dozo" "$@"
     SH
     (bin/"dozo").chmod 0755

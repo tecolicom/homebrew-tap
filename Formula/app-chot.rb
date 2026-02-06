@@ -20,6 +20,7 @@ class AppChot < Formula
     (bin/"chot").write <<~SH
       #!/bin/bash
       export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      export PATH="#{libexec}/bin:$PATH"
       exec "#{libexec}/bin/chot" "$@"
     SH
     (bin/"chot").chmod 0755

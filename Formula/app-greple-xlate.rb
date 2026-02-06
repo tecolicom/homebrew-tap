@@ -20,6 +20,7 @@ class AppGrepleXlate < Formula
     (bin/"xlate").write <<~SH
       #!/bin/bash
       export PERL5LIB="#{libexec}/lib/perl5:#{Formula["app-greple"].opt_libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      export PATH="#{libexec}/bin:$PATH"
       exec "#{libexec}/bin/xlate" "$@"
     SH
     (bin/"xlate").chmod 0755

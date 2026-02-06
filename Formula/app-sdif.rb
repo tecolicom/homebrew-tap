@@ -19,6 +19,7 @@ class AppSdif < Formula
       (bin/cmd).write <<~SH
         #!/bin/bash
         export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+        export PATH="#{libexec}/bin:$PATH"
         exec "#{libexec}/bin/#{cmd}" "$@"
       SH
       (bin/cmd).chmod 0755
