@@ -28,6 +28,7 @@ class AppMdee < Formula
     (bin/"mdee").write <<~SH
       #!/bin/bash
       export PERL5LIB="#{ENV["PERL5LIB"]}${PERL5LIB:+:$PERL5LIB}"
+      export PATH="#{libexec}/bin:$PATH"
       exec "#{libexec}/bin/mdee" "$@"
     SH
     (bin/"mdee").chmod 0755
