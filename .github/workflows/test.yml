@@ -1,0 +1,162 @@
+name: Test Formulas
+
+on:
+  push:
+    paths:
+      - 'Formula/*.rb'
+  schedule:
+    # Weekly: Sunday at midnight UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+env:
+  HOMEBREW_NO_AUTO_UPDATE: 1
+  HOMEBREW_NO_INSTALL_CLEANUP: 1
+
+jobs:
+  test-base:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Homebrew tap
+        run: |
+          brew tap tecolicom/tap
+          # Overlay this repo's formulas onto the tap
+          cp Formula/*.rb "$(brew --repo tecolicom/tap)/Formula/"
+
+      - name: Install and test base formulas
+        run: |
+          formulas=(
+            getoptlong-bash
+            app-greple
+            app-optex
+            app-ansi-tools
+            app-sdif
+            app-cat-v
+            app-chot
+          )
+          failed=()
+          for name in "${formulas[@]}"; do
+            echo "::group::$name"
+            if brew install --build-from-source "tecolicom/tap/$name" && \
+               brew test "tecolicom/tap/$name"; then
+              echo "✓ $name passed"
+            else
+              echo "✗ $name failed"
+              failed+=("$name")
+            fi
+            echo "::endgroup::"
+          done
+          if [ ${#failed[@]} -ne 0 ]; then
+            echo "::error::Failed formulas: ${failed[*]}"
+            exit 1
+          fi
+
+  test-modules:
+    needs: test-base
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Homebrew tap
+        run: |
+          brew tap tecolicom/tap
+          cp Formula/*.rb "$(brew --repo tecolicom/tap)/Formula/"
+
+      - name: Install base dependencies
+        run: |
+          for name in getoptlong-bash app-greple app-optex app-ansi-tools app-sdif app-cat-v app-chot; do
+            brew install --build-from-source "tecolicom/tap/$name"
+          done
+
+      - name: Install and test module formulas
+        run: |
+          formulas=(
+            app-greple-charcode
+            app-greple-jq
+            app-greple-msdoc
+            app-greple-pw
+            app-greple-subst-desumasu
+            app-greple-wordle
+            app-greple-xlate
+            app-optex-conceal
+            app-optex-glob
+            app-optex-mask
+            app-optex-pingu
+            app-optex-rpn
+            app-optex-scroll
+            app-optex-textconv
+            app-optex-up
+            app-optex-xform
+            app-dozo
+          )
+          failed=()
+          for name in "${formulas[@]}"; do
+            echo "::group::$name"
+            if brew install --build-from-source "tecolicom/tap/$name" && \
+               brew test "tecolicom/tap/$name"; then
+              echo "✓ $name passed"
+            else
+              echo "✗ $name failed"
+              failed+=("$name")
+            fi
+            echo "::endgroup::"
+          done
+          if [ ${#failed[@]} -ne 0 ]; then
+            echo "::error::Failed formulas: ${failed[*]}"
+            exit 1
+          fi
+
+  test-apps:
+    needs: test-base
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Homebrew tap
+        run: |
+          brew tap tecolicom/tap
+          cp Formula/*.rb "$(brew --repo tecolicom/tap)/Formula/"
+
+      - name: Install base dependencies
+        run: |
+          for name in getoptlong-bash app-greple app-optex app-ansi-tools app-sdif app-cat-v app-chot; do
+            brew install --build-from-source "tecolicom/tap/$name"
+          done
+
+      - name: Install and test app formulas
+        run: |
+          # Order matters: app-mdee depends on app-nup
+          formulas=(
+            app-nup
+            app-mdee
+          )
+          failed=()
+          for name in "${formulas[@]}"; do
+            echo "::group::$name"
+            if brew install --build-from-source "tecolicom/tap/$name" && \
+               brew test "tecolicom/tap/$name"; then
+              echo "✓ $name passed"
+            else
+              echo "✗ $name failed"
+              failed+=("$name")
+            fi
+            echo "::endgroup::"
+          done
+          if [ ${#failed[@]} -ne 0 ]; then
+            echo "::error::Failed formulas: ${failed[*]}"
+            exit 1
+          fi
