@@ -14,14 +14,12 @@ class AppGrepleSubstDesumasu < Formula
     ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
 
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    ENV.prepend_path "PERL5LIB", Formula["app-greple"].opt_libexec/"lib/perl5"
     system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
     man3.install Dir[libexec/"man/man3/App::Greple::subst::desumasu*.3"]
   end
 
   test do
-    ENV["PERL5LIB"] = "#{libexec}/lib/perl5:#{Formula["app-greple"].opt_libexec}/lib/perl5"
     assert_match "desumasu", shell_output("#{Formula["app-greple"].opt_bin}/greple -Msubst::desumasu --man")
   end
 end
