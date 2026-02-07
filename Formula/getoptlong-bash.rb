@@ -5,6 +5,7 @@ class GetoptlongBash < Formula
   sha256 "edee0e97f9346ea42fd8865b050d510416c46b0a67a3f6cb7b6448d93e56781f"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
+  depends_on "bash"
   depends_on "cpm"
 
   def install
