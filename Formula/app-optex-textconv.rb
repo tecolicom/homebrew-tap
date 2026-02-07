@@ -12,7 +12,6 @@ class AppOptexTextconv < Formula
     ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
 
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    ENV.prepend_path "PERL5LIB", Formula["app-optex"].opt_libexec/"lib/perl5"
 
     system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
