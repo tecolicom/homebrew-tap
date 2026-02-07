@@ -18,6 +18,9 @@ class AppOptex < Formula
     (bin/"optex").write <<~SH
       #!/bin/bash
       export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+      for dir in "#{HOMEBREW_PREFIX}/opt"/app-optex-*/libexec/lib/perl5; do
+        [ -d "$dir" ] && PERL5LIB="$dir:$PERL5LIB"
+      done
       export PATH="#{libexec}/bin:$PATH"
       export OPTEX_SCRIPT_PATH="#{HOMEBREW_PREFIX}/bin/optex"
       export OPTEX_INVOKED_AS="$0"
