@@ -31,6 +31,20 @@ brew tap tecolicom/tap
 | [app-greple-wordle](https://github.com/kaz-utashiro/greple-wordle) | Wordle game |
 | [app-greple-xlate](https://github.com/kaz-utashiro/App-Greple-xlate) | Translation support |
 
+### Optex Modules
+
+| Formula | Description |
+|---------|-------------|
+| [app-optex-conceal](https://github.com/kaz-utashiro/optex-conceal) | Conceal output contents |
+| [app-optex-glob](https://github.com/kaz-utashiro/optex-glob) | Glob filenames |
+| [app-optex-mask](https://github.com/kaz-utashiro/optex-mask) | Data masking |
+| [app-optex-pingu](https://github.com/kaz-utashiro/optex-pingu) | Make-everything-pingu filter |
+| [app-optex-rpn](https://github.com/kaz-utashiro/optex-rpn) | Reverse Polish Notation calculation |
+| [app-optex-scroll](https://github.com/kaz-utashiro/optex-scroll) | Scroll region |
+| [app-optex-textconv](https://github.com/kaz-utashiro/optex-textconv) | Replace document file by its text contents |
+| [app-optex-up](https://github.com/kaz-utashiro/optex-up) | Multi-column paged output |
+| [app-optex-xform](https://github.com/kaz-utashiro/optex-xform) | Data transform filter |
+
 ### ANSI Terminal Tools
 
 | Formula | Commands | Description |
