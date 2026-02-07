@@ -17,16 +17,11 @@ class AppNup < Formula
 
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
 
-    # Add dependent formulae's PERL5LIB paths
-    %w[app-ansi-tools app-optex getoptlong-bash].each do |dep|
-      ENV.prepend_path "PERL5LIB", Formula[dep].opt_libexec/"lib/perl5"
-    end
-
     system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
     (bin/"nup").write <<~SH
       #!/bin/bash
-      export PERL5LIB="#{ENV["PERL5LIB"]}${PERL5LIB:+:$PERL5LIB}"
+      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
       export PATH="#{libexec}/bin:$PATH"
       exec "#{libexec}/bin/nup" "$@"
     SH

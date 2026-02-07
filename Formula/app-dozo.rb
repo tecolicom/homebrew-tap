@@ -14,13 +14,12 @@ class AppDozo < Formula
     ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
 
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    ENV.prepend_path "PERL5LIB", Formula["getoptlong-bash"].opt_libexec/"lib/perl5"
 
     system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
     (bin/"dozo").write <<~SH
       #!/bin/bash
-      export PERL5LIB="#{ENV["PERL5LIB"]}${PERL5LIB:+:$PERL5LIB}"
+      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
       export PATH="#{libexec}/bin:$PATH"
       exec "#{libexec}/bin/dozo" "$@"
     SH
