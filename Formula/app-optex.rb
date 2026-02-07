@@ -4,6 +4,7 @@ class AppOptex < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-optex-1.0601.tar.gz"
   sha256 "4c5989a62deabae2116064ae77c5630ef9e3908988fbc8216af2742202174827"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
 
