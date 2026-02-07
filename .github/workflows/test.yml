@@ -22,6 +22,7 @@ jobs:
         os: [macos-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
+      - uses: Homebrew/actions/setup-homebrew@master
 
       - name: Set up Homebrew tap
         run: |
@@ -66,6 +67,7 @@ jobs:
         os: [macos-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
+      - uses: Homebrew/actions/setup-homebrew@master
 
       - name: Set up Homebrew tap
         run: |
@@ -125,6 +127,7 @@ jobs:
         os: [macos-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
+      - uses: Homebrew/actions/setup-homebrew@master
 
       - name: Set up Homebrew tap
         run: |
