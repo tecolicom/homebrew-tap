@@ -14,7 +14,9 @@ class AppOptexMask < Formula
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
     ENV.prepend_path "PERL5LIB", Formula["app-optex"].opt_libexec/"lib/perl5"
 
-    system "cpm", "install", "--home", buildpath.parent/".cpm", "-L", libexec, "."
+    system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
+
+    man3.install Dir[libexec/"man/man3/App::optex::mask*.3"]
   end
 
   test do
