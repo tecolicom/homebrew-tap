@@ -20,72 +20,29 @@ env:
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runs-on }}
+    container: ${{ matrix.container }}
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        include:
+          - runs-on: macos-latest
+          - runs-on: ubuntu-latest
+          - runs-on: ubuntu-latest
+            container: homebrew/brew
     steps:
       - uses: actions/checkout@v4
+        if: ${{ !matrix.container }}
       - uses: Homebrew/actions/setup-homebrew@master
+        if: ${{ !matrix.container }}
+      - name: Set up Homebrew tap
+        if: ${{ matrix.container }}
+        run: brew tap tecolicom/tap
 
-      - name: Install all formulas
-        run: |
-          # Order matters: dependencies must be installed before dependents
-          formulas=(
-            getoptlong-bash
-            app-greple
-            app-optex
-            app-ansi-tools
-            app-sdif
-            app-cat-v
-            app-chot
-            app-greple-charcode
-            app-greple-jq
-            app-greple-msdoc
-            app-greple-pw
-            app-greple-subst-desumasu
-            app-greple-wordle
-            app-greple-xlate
-            app-optex-glob
-            app-optex-mask
-            app-optex-pingu
-            app-optex-rpn
-            app-optex-scroll
-            app-optex-textconv
-            app-optex-up
-            app-optex-xform
-            app-dozo
-            app-nup
-            app-mdee
-          )
-          failed=()
-          for name in "${formulas[@]}"; do
-            echo "::group::$name"
-            if brew install "tecolicom/tap/$name"; then
-              echo "✓ $name passed"
-            else
-              echo "✗ $name failed"
-              failed+=("$name")
-            fi
-            echo "::endgroup::"
-          done
-          if [ ${#failed[@]} -ne 0 ]; then
-            echo "::error::Failed formulas: ${failed[*]}"
-            exit 1
-          fi
-
-  test-docker:
-    runs-on: ubuntu-latest
-    container: homebrew/brew
-    steps:
       - name: Install all formulas
         shell: bash
-        env:
-          HOMEBREW_NO_AUTO_UPDATE: 1
-          HOMEBREW_NO_INSTALL_CLEANUP: 1
         run: |
-          brew tap tecolicom/tap
+          # Order matters: dependencies must be installed before dependents
           formulas=(
             getoptlong-bash
             app-greple
