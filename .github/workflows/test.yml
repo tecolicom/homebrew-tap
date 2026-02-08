@@ -80,6 +80,7 @@ jobs:
     container: homebrew/brew
     steps:
       - name: Install all formulas
+        shell: bash
         env:
           HOMEBREW_NO_AUTO_UPDATE: 1
           HOMEBREW_NO_INSTALL_CLEANUP: 1
