@@ -19,7 +19,7 @@ env:
   HOMEBREW_NO_INSTALL_CLEANUP: 1
 
 jobs:
-  test-base:
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -29,8 +29,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: Homebrew/actions/setup-homebrew@master
 
-      - name: Install and test base formulas
+      - name: Install and test all formulas
         run: |
+          # Order matters: dependencies must be installed before dependents
           formulas=(
             getoptlong-bash
             app-greple
@@ -39,44 +40,6 @@ jobs:
             app-sdif
             app-cat-v
             app-chot
-          )
-          failed=()
-          for name in "${formulas[@]}"; do
-            echo "::group::$name"
-            if brew install --build-from-source "tecolicom/tap/$name" && \
-               brew test "tecolicom/tap/$name"; then
-              echo "✓ $name passed"
-            else
-              echo "✗ $name failed"
-              failed+=("$name")
-            fi
-            echo "::endgroup::"
-          done
-          if [ ${#failed[@]} -ne 0 ]; then
-            echo "::error::Failed formulas: ${failed[*]}"
-            exit 1
-          fi
-
-  test-modules:
-    needs: test-base
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-latest, ubuntu-latest]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: Homebrew/actions/setup-homebrew@master
-
-      - name: Install base dependencies
-        run: |
-          for name in getoptlong-bash app-greple app-optex app-ansi-tools app-sdif app-cat-v app-chot; do
-            brew install --build-from-source "tecolicom/tap/$name"
-          done
-
-      - name: Install and test module formulas
-        run: |
-          formulas=(
             app-greple-charcode
             app-greple-jq
             app-greple-msdoc
@@ -93,6 +56,8 @@ jobs:
             app-optex-up
             app-optex-xform
             app-dozo
+            app-nup
+            app-mdee
           )
           failed=()
           for name in "${formulas[@]}"; do
@@ -111,27 +76,42 @@ jobs:
             exit 1
           fi
 
-  test-apps:
-    needs: test-base
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-latest, ubuntu-latest]
+  test-docker:
+    runs-on: ubuntu-latest
+    container: homebrew/brew
     steps:
       - uses: actions/checkout@v4
-      - uses: Homebrew/actions/setup-homebrew@master
 
-      - name: Install base dependencies
+      - name: Install and test all formulas
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: 1
+          HOMEBREW_NO_INSTALL_CLEANUP: 1
         run: |
-          for name in getoptlong-bash app-greple app-optex app-ansi-tools app-sdif app-cat-v app-chot; do
-            brew install --build-from-source "tecolicom/tap/$name"
-          done
-
-      - name: Install and test app formulas
-        run: |
-          # Order matters: app-mdee depends on app-nup
+          brew tap tecolicom/tap "$(pwd)"
           formulas=(
+            getoptlong-bash
+            app-greple
+            app-optex
+            app-ansi-tools
+            app-sdif
+            app-cat-v
+            app-chot
+            app-greple-charcode
+            app-greple-jq
+            app-greple-msdoc
+            app-greple-pw
+            app-greple-subst-desumasu
+            app-greple-wordle
+            app-greple-xlate
+            app-optex-glob
+            app-optex-mask
+            app-optex-pingu
+            app-optex-rpn
+            app-optex-scroll
+            app-optex-textconv
+            app-optex-up
+            app-optex-xform
+            app-dozo
             app-nup
             app-mdee
           )
