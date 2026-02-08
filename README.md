@@ -35,7 +35,6 @@ brew tap tecolicom/tap
 
 | Formula | Description |
 |---------|-------------|
-| [app-optex-conceal](https://github.com/kaz-utashiro/optex-conceal) | Conceal output contents |
 | [app-optex-glob](https://github.com/kaz-utashiro/optex-glob) | Glob filenames |
 | [app-optex-mask](https://github.com/kaz-utashiro/optex-mask) | Data masking |
 | [app-optex-pingu](https://github.com/kaz-utashiro/optex-pingu) | Make-everything-pingu filter |
