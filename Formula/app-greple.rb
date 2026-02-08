@@ -16,20 +16,11 @@ class AppGreple < Formula
     system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
     # Install commonly used greple modules (from app-greple-tools)
-    %w[
-      App::Greple::frame
-      App::Greple::git
-      App::Greple::L
-      App::Greple::stripe
-      App::Greple::subst
-      App::Greple::tee
-      App::Greple::type
-      App::Greple::under
-      App::Greple::update
-      App::Greple::xp
-    ].each do |mod|
-      system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, mod
-    end
+    system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec,
+      "App::Greple::frame", "App::Greple::git", "App::Greple::L",
+      "App::Greple::stripe", "App::Greple::subst", "App::Greple::tee",
+      "App::Greple::type", "App::Greple::under", "App::Greple::update",
+      "App::Greple::xp"
 
     (bin/"greple").write <<~SH
       #!/bin/bash
