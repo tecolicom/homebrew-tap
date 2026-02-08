@@ -19,6 +19,7 @@ class AppOptexMask < Formula
   end
 
   test do
-    system Formula["app-optex"].bin/"optex", "-Mmask", "--version"
+    result = shell_output("echo men | #{Formula["app-optex"].bin/"optex"} -Mmask men -- sed s/men/women/")
+    assert_equal "men\n", result
   end
 end
