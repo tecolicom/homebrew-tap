@@ -14,7 +14,7 @@ class AppGrepleMsdoc < Formula
     ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
 
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    system "cpm", "install", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
+    system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
     man3.install Dir[libexec/"man/man3/App::Greple::msdoc*.3"]
   end

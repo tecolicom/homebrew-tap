@@ -62,7 +62,7 @@ jobs:
           failed=()
           for name in "${formulas[@]}"; do
             echo "::group::$name"
-            if brew install --build-from-source "tecolicom/tap/$name"; then
+            if brew install "tecolicom/tap/$name"; then
               echo "✓ $name passed"
             else
               echo "✗ $name failed"
