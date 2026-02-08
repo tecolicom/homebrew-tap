@@ -30,12 +30,12 @@ class AppAnsiTools < Formula
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
 
     # Install main formula (App-ansicolumn)
-    system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
+    system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
     # Install additional resources
     resources.each do |r|
       r.stage do
-        system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
+        system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
       end
     end
 

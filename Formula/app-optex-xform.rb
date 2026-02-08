@@ -13,7 +13,7 @@ class AppOptexXform < Formula
 
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
 
-    system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
+    system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
     man3.install Dir[libexec/"man/man3/App::optex::xform*.3"]
   end
