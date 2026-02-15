@@ -12,16 +12,7 @@ class PandocEmbedz < Formula
     python = Formula["python@3.12"]
     venv = libexec/"venv"
     system python.opt_bin/"python3.12", "-m", "venv", venv
-    system venv/"bin/pip", "install", "--no-deps", "."
-
-    # Install dependencies
-    system venv/"bin/pip", "install",
-      "panflute>=2.0.0",
-      "jinja2>=3.0.0",
-      "pandas>=1.0.0",
-      "pyyaml>=5.0.0",
-      "tomli>=1.0.0",
-      "regex>=2024.11.6"
+    system venv/"bin/pip", "install", "."
 
     (bin/"pandoc-embedz").write_env_script(
       venv/"bin/pandoc-embedz",
