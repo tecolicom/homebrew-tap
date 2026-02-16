@@ -1,8 +1,8 @@
 class AppChot < Formula
   desc "Locate and display source of commands and libraries"
   homepage "https://github.com/tecolicom/App-chot"
-  url "https://github.com/tecolicom/App-chot/archive/refs/tags/1.02.tar.gz"
-  sha256 "87bbe7a6b1e92679d176de0c42693b831590a6f78c6f9c5f1955de33f958b9fb"
+  url "https://github.com/tecolicom/App-chot/archive/refs/tags/1.03.tar.gz"
+  sha256 "d30d3a9b01c7cdab783b3dd06061c21ea91133fb8ba7c27cbbd2f3abcdf82bf4"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
   head "https://github.com/tecolicom/App-chot.git", branch: "main"
 
