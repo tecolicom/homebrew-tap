@@ -56,6 +56,7 @@ brew tap tecolicom/tap
 |---------|---------|-------------|
 | [app-nup](https://github.com/tecolicom/App-nup) | `nup` | N-up contents-aware page-layout |
 | [app-mdee](https://github.com/tecolicom/App-mdee) | `mdee` | Multi-column Markdown viewer with syntax highlighting |
+| [pandoc-embedz](https://github.com/tecolicom/pandoc-embedz) | `pandoc-embedz` | Pandoc filter for embedding data-driven content using Jinja2 templates |
 
 ### Docker
 
