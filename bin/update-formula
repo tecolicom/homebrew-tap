@@ -9,6 +9,78 @@ set -e
 
 cd "$(dirname "$0")/.."
 
+# Fetch latest CPAN release info and update URL/SHA256 in formula file.
+# Uses dist name in URL as unique identifier for targeted replacement.
+# Returns 0 if updated, 1 if already up to date or error.
+update_cpan_dist() {
+    local formula_file=$1
+    local dist_name=$2
+
+    local info url version
+    info=$(curl -s "https://fastapi.metacpan.org/v1/release/$dist_name")
+    version=$(echo "$info" | jq -r '.version')
+    url=$(echo "$info" | jq -r '.download_url')
+
+    if [[ "$version" == "null" || "$url" == "null" ]]; then
+        echo "  Error: Could not fetch info for $dist_name"
+        return 1
+    fi
+
+    # Get current version from URL containing this dist name
+    local current_version
+    current_version=$(grep "${dist_name}-" "$formula_file" | sed -E "s|.*${dist_name}-([0-9v.]+)\.tar\.gz.*|\1|")
+
+    if [[ "$current_version" == "$version" ]]; then
+        echo "  $dist_name: up to date ($version)"
+        return 1
+    fi
+
+    echo "  $dist_name: $current_version -> $version"
+
+    local sha256
+    sha256=$(curl -sL "$url" | shasum -a 256 | cut -d' ' -f1)
+
+    # Find the specific URL line for this dist and update it + next sha256 line
+    local url_line sha_line
+    url_line=$(grep -n "${dist_name}-" "$formula_file" | head -1 | cut -d: -f1)
+    sha_line=$((url_line + 1))
+
+    sed -i '' "${url_line}s|url \".*\"|url \"${url}\"|" "$formula_file"
+    sed -i '' "${sha_line}s|sha256 \".*\"|sha256 \"${sha256}\"|" "$formula_file"
+
+    return 0
+}
+
+# Extract resource dist names from formula
+extract_resources() {
+    local formula_file=$1
+    grep -oE 'resource "([^"]+)"' "$formula_file" | sed 's/resource "//;s/"//' || true
+}
+
+# Remove revision line from formula
+remove_revision() {
+    local formula_file=$1
+    sed -i '' '/^  revision [0-9]/d' "$formula_file"
+}
+
+# Bump revision in formula (add or increment)
+bump_revision() {
+    local formula_file=$1
+    local current
+    current=$(grep -oE 'revision [0-9]+' "$formula_file" | awk '{print $2}' || true)
+
+    if [[ -z "$current" ]]; then
+        # Add revision 1 after primary sha256 line
+        local sha_line
+        sha_line=$(grep -n '^\s*sha256' "$formula_file" | head -1 | cut -d: -f1)
+        sed -i '' "${sha_line}a\\
+  revision 1" "$formula_file"
+    else
+        local new=$((current + 1))
+        sed -i '' "s/revision $current/revision $new/" "$formula_file"
+    fi
+}
+
 update_formula() {
     local FORMULA=$1
     local FORMULA_FILE="Formula/${FORMULA}.rb"
@@ -18,8 +90,9 @@ update_formula() {
         return 1
     fi
 
-    # Extract CPAN dist name from URL in formula
-    local CPAN_DIST=$(grep -E '^\s*url\s+"' "$FORMULA_FILE" | sed -E 's|.*/([^/]+)-[0-9v.]+\.tar\.gz.*|\1|')
+    # Extract primary CPAN dist name from first URL line
+    local CPAN_DIST
+    CPAN_DIST=$(grep -E '^\s*url\s+"' "$FORMULA_FILE" | head -1 | sed -E 's|.*/([^/]+)-[0-9v.]+\.tar\.gz.*|\1|')
 
     if [[ -z "$CPAN_DIST" ]]; then
         echo "Skipping $FORMULA (no CPAN URL found)"
@@ -28,32 +101,36 @@ update_formula() {
 
     echo "=== $FORMULA (CPAN: $CPAN_DIST) ==="
 
-    local INFO=$(curl -s "https://fastapi.metacpan.org/v1/release/$CPAN_DIST")
-    local VERSION=$(echo "$INFO" | jq -r '.version')
-    local URL=$(echo "$INFO" | jq -r '.download_url')
+    local primary_changed=false
+    local resource_changed=false
 
-    if [[ "$VERSION" == "null" || "$URL" == "null" ]]; then
-        echo "Error: Could not fetch info for $CPAN_DIST"
-        return 1
+    # Update primary dist
+    if update_cpan_dist "$FORMULA_FILE" "$CPAN_DIST"; then
+        primary_changed=true
     fi
 
-    # Get current version
-    local CURRENT_VERSION=$(grep -E '^\s*url\s+"' "$FORMULA_FILE" | sed -E 's/.*-([0-9v.]+)\.tar\.gz.*/\1/')
-
-    if [[ "$CURRENT_VERSION" == "$VERSION" ]]; then
-        echo "Already up to date ($VERSION)"
-        echo ""
-        return 0
+    # Update resources
+    local resources
+    resources=$(extract_resources "$FORMULA_FILE")
+    if [[ -n "$resources" ]]; then
+        while IFS= read -r res; do
+            if update_cpan_dist "$FORMULA_FILE" "$res"; then
+                resource_changed=true
+            fi
+        done <<< "$resources"
     fi
 
-    echo "Updating: $CURRENT_VERSION -> $VERSION"
+    # Revision logic
+    if $primary_changed; then
+        # Primary version changed: remove revision (version bump resets it)
+        remove_revision "$FORMULA_FILE"
+        echo "  -> Version bumped (revision reset)"
+    elif $resource_changed; then
+        # Only resources changed: bump revision
+        bump_revision "$FORMULA_FILE"
+        echo "  -> Resources updated (revision bumped)"
+    fi
 
-    local SHA256=$(curl -sL "$URL" | shasum -a 256 | cut -d' ' -f1)
-
-    sed -i '' "s|url \".*\"|url \"$URL\"|" "$FORMULA_FILE"
-    sed -i '' "s|sha256 \".*\"|sha256 \"$SHA256\"|" "$FORMULA_FILE"
-
-    echo "Updated $FORMULA_FILE"
     echo ""
 }
 
