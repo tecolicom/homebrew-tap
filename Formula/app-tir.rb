@@ -1,4 +1,4 @@
-class Tir < Formula
+class AppTir < Formula
   desc "Kitchen timer command with notification, speech, and countdown"
   homepage "https://github.com/kaz-utashiro/tir"
   url "https://github.com/kaz-utashiro/tir/archive/refs/tags/v0.7.tar.gz"
