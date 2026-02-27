@@ -1,15 +1,12 @@
 class AppMdee < Formula
   desc "em·dee, Markdown Easy on the Eyes"
   homepage "https://github.com/tecolicom/App-mdee"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-mdee-1.04.tar.gz"
-  sha256 "232cf53ab5d6ba44a74fa2a2434fff1b603c8b3ca2b706507ba694a91e92f670"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-mdee-1.05.tar.gz"
+  sha256 "91a755ca784240d798666776d2340e5d848187230cf91a8c5dc8ba41a7e6e64a"
   license "MIT"
 
   depends_on "cpm"
-  depends_on "tecolicom/tap/app-ansi-tools"
-  depends_on "tecolicom/tap/app-greple"
   depends_on "tecolicom/tap/app-nup"
-  depends_on "tecolicom/tap/getoptlong-bash"
 
   def install
     # Prevent superenv from injecting -mbranch-protection=standard
