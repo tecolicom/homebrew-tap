@@ -1,14 +1,11 @@
 class AppNup < Formula
   desc "n-up, multi-column paged output for commands and files"
   homepage "https://github.com/tecolicom/App-nup"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-0.9906.tar.gz"
-  sha256 "10efdae9d14a2511550a9b3579873de8cfc0ec292fe2dceaa33c53b17893e5f7"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-0.9907.tar.gz"
+  sha256 "1501c1dc2c94ca0a94084ef5aaf477a5cbb42de33433d6b58b35942b49231d0b"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
   depends_on "cpm"
-  depends_on "tecolicom/tap/app-ansi-tools"
-  depends_on "tecolicom/tap/app-optex"
-  depends_on "tecolicom/tap/getoptlong-bash"
 
   def install
     # Prevent superenv from injecting -mbranch-protection=standard
