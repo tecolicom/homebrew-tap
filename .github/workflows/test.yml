@@ -42,10 +42,10 @@ jobs:
       - name: Install all formulas
         shell: bash
         run: |
+          tap_dir="$(brew --repository tecolicom/tap)"
           failed=()
-          for rb in Formula/*.rb; do
-            name="${rb%.rb}"
-            name="${name#Formula/}"
+          for rb in "$tap_dir"/Formula/*.rb; do
+            name="$(basename "$rb" .rb)"
             echo "::group::$name"
             if brew install "tecolicom/tap/$name"; then
               echo "✓ $name passed"
