@@ -5,27 +5,15 @@ class AppDozo < Formula
   sha256 "5637e666268918e850f3aac3465cc158c7cf7a7bed1acb4c70f3b9a2e594b0ea"
   license "MIT"
 
-  depends_on "cpm"
   depends_on "tecolicom/tap/getoptlong-bash"
 
   def install
-    # Prevent superenv from injecting -mbranch-protection=standard
-    # which causes "Illegal instruction" in Docker on arm64
-    ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
-
-    ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-
-    system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
-
-    (bin/"dozo").write <<~SH
-      #!/bin/bash
-      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
-      export PATH="#{libexec}/bin:$PATH"
-      exec "#{libexec}/bin/dozo" "$@"
-    SH
-    (bin/"dozo").chmod 0755
-
-    man1.install libexec/"man/man1/dozo.1"
+    bin.install "script/dozo"
+    if which("pod2man")
+      system "pod2man", "--name=dozo", "--section=1",
+             "lib/App/dozo.pm", "dozo.1"
+      man1.install "dozo.1"
+    end
   end
 
   test do
