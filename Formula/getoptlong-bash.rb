@@ -6,25 +6,14 @@ class GetoptlongBash < Formula
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
   depends_on "bash"
-  depends_on "cpm"
 
   def install
-    # Prevent superenv from injecting -mbranch-protection=standard
-    # which causes "Illegal instruction" in Docker on arm64
-    ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
-
-    ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
-
-    (bin/"getoptlong").write <<~SH
-      #!/bin/bash
-      export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
-      exec "#{libexec}/bin/getoptlong" "$@"
-    SH
-    (bin/"getoptlong").chmod 0755
-    bin.install_symlink libexec/"bin/getoptlong.sh"
-
-    man1.install Dir[libexec/"man/man1/getoptlong*.1"]
+    bin.install "script/getoptlong", "script/getoptlong.sh"
+    if which("pod2man")
+      system "pod2man", "--name=getoptlong", "--section=3",
+             "--center=Bash Library", "lib/Getopt/Long/Bash.pm", "getoptlong.3"
+      man3.install "getoptlong.3"
+    end
   end
 
   test do
