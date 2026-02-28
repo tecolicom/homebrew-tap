@@ -46,6 +46,15 @@ jobs:
           failed=()
           for rb in "$tap_dir"/Formula/*.rb; do
             name="$(basename "$rb" .rb)"
+            if [[ "$(uname)" != "Linux" ]] && grep -q 'depends_on :linux' "$rb"; then
+              echo "::group::$name (skipped: Linux only)"
+              echo "::endgroup::"
+              continue
+            elif [[ "$(uname)" != "Darwin" ]] && grep -q 'depends_on :macos' "$rb"; then
+              echo "::group::$name (skipped: macOS only)"
+              echo "::endgroup::"
+              continue
+            fi
             echo "::group::$name"
             if brew install "tecolicom/tap/$name"; then
               echo "✓ $name passed"
