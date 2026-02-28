@@ -42,36 +42,10 @@ jobs:
       - name: Install all formulas
         shell: bash
         run: |
-          # Order matters: dependencies must be installed before dependents
-          formulas=(
-            getoptlong-bash
-            app-greple
-            app-optex
-            app-ansi-tools
-            app-sdif
-            app-cat-v
-            app-chot
-            app-greple-charcode
-            app-greple-jq
-            app-greple-msdoc
-            app-greple-pw
-            app-greple-subst-desumasu
-            app-greple-wordle
-            app-greple-xlate
-            app-optex-glob
-            app-optex-mask
-            app-optex-pingu
-            app-optex-rpn
-            app-optex-scroll
-            app-optex-textconv
-            app-optex-up
-            app-optex-xform
-            app-dozo
-            app-nup
-            app-mdee
-          )
           failed=()
-          for name in "${formulas[@]}"; do
+          for rb in Formula/*.rb; do
+            name="${rb%.rb}"
+            name="${name#Formula/}"
             echo "::group::$name"
             if brew install "tecolicom/tap/$name"; then
               echo "✓ $name passed"
