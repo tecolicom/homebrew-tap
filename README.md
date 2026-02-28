@@ -55,7 +55,6 @@ brew tap tecolicom/tap
 | [app-optex-rpn](https://github.com/kaz-utashiro/optex-rpn#readme) | [`-Mrpn`](https://metacpan.org/pod/App::optex::rpn) | Reverse Polish Notation calculation |
 | [app-optex-scroll](https://github.com/kaz-utashiro/optex-scroll#readme) | [`-Mscroll`](https://metacpan.org/pod/App::optex::scroll) | Scroll region |
 | [app-optex-textconv](https://github.com/kaz-utashiro/optex-textconv#readme) | [`-Mtextconv`](https://metacpan.org/pod/App::optex::textconv) | Replace document file by its text contents |
-| [app-optex-up](https://github.com/kaz-utashiro/optex-up#readme) | [`-Mup`](https://metacpan.org/pod/App::optex::up) | Multi-column paged output |
 | [app-optex-xform](https://github.com/kaz-utashiro/optex-xform#readme) | [`-Mxform`](https://metacpan.org/pod/App::optex::xform) | Data transform filter |
 
 ### Text Processing
@@ -81,7 +80,14 @@ brew tap tecolicom/tap
 | Formula | Command | Description |
 |---------|---------|-------------|
 | [app-nup](https://github.com/tecolicom/App-nup#readme) | [`nup`](https://metacpan.org/pod/App::nup) | N-up contents-aware page-layout |
+| | [`optex -Mup`](https://metacpan.org/pod/App::optex::up) | (bundled optex module) |
 | [app-mdee](https://github.com/tecolicom/App-mdee#readme) | [`mdee`](https://metacpan.org/pod/App::mdee) | Multi-column Markdown viewer with syntax highlighting |
+| | [`greple -Mmd`](https://metacpan.org/pod/App::Greple::md) | (bundled greple module) |
+
+### Pandoc
+
+| Formula | Command | Description |
+|---------|---------|-------------|
 | [pandoc-embedz](https://github.com/tecolicom/pandoc-embedz#readme) | `pandoc-embedz` | Pandoc filter for data-driven content embedding |
 
 ### Docker
