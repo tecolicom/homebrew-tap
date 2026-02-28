@@ -8,12 +8,12 @@ class GetoptlongBash < Formula
   depends_on "bash"
 
   def install
-    bin.install "script/getoptlong", "script/getoptlong.sh"
     if which("pod2man")
       system "pod2man", "--name=getoptlong", "--section=3",
-             "--center=Bash Library", "lib/Getopt/Long/Bash.pm", "getoptlong.3"
+             "--center=Bash Library", "script/getoptlong", "getoptlong.3"
       man3.install "getoptlong.3"
     end
+    bin.install "script/getoptlong", "script/getoptlong.sh"
   end
 
   test do
