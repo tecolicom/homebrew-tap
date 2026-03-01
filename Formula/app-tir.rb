@@ -1,8 +1,8 @@
 class AppTir < Formula
   desc "Kitchen timer command with notification, speech, and countdown"
   homepage "https://github.com/kaz-utashiro/tir"
-  url "https://github.com/kaz-utashiro/tir/archive/refs/tags/v0.8.tar.gz"
-  sha256 "deb269825d551de20371b8aa23fc2ad24b5d137cea474f161ad9c2c2a28d781c"
+  url "https://github.com/kaz-utashiro/tir/archive/refs/tags/v0.9.tar.gz"
+  sha256 "ca213f1e3f7ee9ea5678b75e89e6b3466aa9ee3abb366847d3388ec97de0ce0f"
   license "MIT"
   depends_on :macos
 
