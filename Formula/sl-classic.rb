@@ -2,7 +2,7 @@ class SlClassic < Formula
   desc "Steam Locomotive runs across your terminal when you type sl"
   homepage "https://github.com/tecolicom/sl"
   url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.tar.gz"
-  sha256 "4be7b6c62556ec245a668d6835a9294eac15c12a7aabfb8cb42340f1b87f042d"
+  sha256 "5403372d70f34e820522e47f16594e99043ffa2b4e458755f48dc473a1818425"
   license "BSD-2-Clause"
   version "2026"
 
