@@ -9,9 +9,7 @@ class SlClassic < Formula
   uses_from_macos "ncurses"
 
   def install
-    system ENV.cc, "-std=c89",
-           "-Wno-implicit-int", "-Wno-implicit-function-declaration",
-           "-Wno-incompatible-function-pointer-types",
+    system ENV.cc, "-std=c89", "-w",
            "-include", "term.h", "-DCM=cursor_address",
            "-o", "sl-1985", "src/sl.c", "-lcurses"
     system ENV.cc, "-o", "sl-2010", "src/sl-2010.c", "-lcurses"
