@@ -56,7 +56,11 @@ jobs:
               continue
             fi
             echo "::group::$name"
-            if brew install "tecolicom/tap/$name"; then
+            install_args=()
+            if [[ "$name" == "app-cat-v" ]]; then
+              install_args=(--verbose --debug)
+            fi
+            if brew install "${install_args[@]}" "tecolicom/tap/$name"; then
               echo "✓ $name passed"
             else
               echo "✗ $name failed"
