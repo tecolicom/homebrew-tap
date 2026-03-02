@@ -10,7 +10,11 @@ class SlClassic < Formula
 
   def install
     flags = ["-std=c89", "-Wno-implicit-int", "-Wno-implicit-function-declaration"]
-    flags << "-Wno-incompatible-function-pointer-types" if ENV.compiler == :clang
+    if ENV.compiler == :clang
+      flags << "-Wno-incompatible-function-pointer-types"
+      flags << "-Wno-deprecated-non-prototype"
+      flags << "-Wno-return-type"
+    end
 
     system ENV.cc, *flags,
            "-include", "term.h", "-DCM=cursor_address",
