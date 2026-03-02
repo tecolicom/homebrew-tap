@@ -9,13 +9,21 @@ class SlClassic < Formula
   uses_from_macos "ncurses"
 
   def install
+    system ENV.cc, "-std=c89",
+           "-Wno-implicit-int", "-Wno-implicit-function-declaration",
+           "-Wno-incompatible-function-pointer-types",
+           "-include", "term.h", "-DCM=cursor_address",
+           "-o", "sl-1985", "src/sl.c", "-lcurses"
+    system ENV.cc, "-o", "sl-2010", "src/sl-2010.c", "-lcurses"
     system ENV.cc, "-o", "sl-2023", "src/sl-2023.c", "-lcurses"
-    (libexec/"sl-classic").install "sl-2023"
+    (libexec/"sl-classic").install "sl-1985", "sl-2010", "sl-2023"
     bin.install "src/sl.sh" => "sl"
   end
 
   test do
     assert_predicate bin/"sl", :executable?
+    assert_predicate libexec/"sl-classic/sl-1985", :executable?
+    assert_predicate libexec/"sl-classic/sl-2010", :executable?
     assert_predicate libexec/"sl-classic/sl-2023", :executable?
   end
 end
