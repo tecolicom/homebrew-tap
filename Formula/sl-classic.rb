@@ -5,6 +5,7 @@ class SlClassic < Formula
   sha256 "96d55beddac2cc5360e82b0a79f3f51872e64bcbc45cf5715dc917b87f4a1e2d"
   license "BSD-2-Clause"
   version "2026"
+  revision 1
 
   uses_from_macos "ncurses"
 
@@ -16,18 +17,27 @@ class SlClassic < Formula
       flags << "-Wno-return-type"
     end
 
-    system ENV.cc, *flags,
-           "-include", "term.h", "-DCM=cursor_address",
-           "-o", "sl-1985", "src/sl.c", "-lcurses"
+    binaries = []
+    if quiet_system ENV.cc, *flags,
+                    "-include", "term.h", "-DCM=cursor_address",
+                    "-o", "sl-1985", "src/sl.c", "-lcurses"
+      binaries << "sl-1985"
+    else
+      opoo "Failed to build sl-1985; installing sl-2010 and sl-2023 only"
+    end
+
     system ENV.cc, "-o", "sl-2010", "src/sl-2010.c", "-lcurses"
     system ENV.cc, "-o", "sl-2023", "src/sl-2023.c", "-lcurses"
-    (libexec/"sl-classic").install "sl-1985", "sl-2010", "sl-2023"
+    binaries += ["sl-2010", "sl-2023"]
+    (libexec/"sl-classic").install *binaries
     bin.install "src/sl.sh" => "sl"
   end
 
   test do
     assert_predicate bin/"sl", :executable?
-    assert_predicate libexec/"sl-classic/sl-1985", :executable?
+    if (libexec/"sl-classic/sl-1985").exist?
+      assert_predicate libexec/"sl-classic/sl-1985", :executable?
+    end
     assert_predicate libexec/"sl-classic/sl-2010", :executable?
     assert_predicate libexec/"sl-classic/sl-2023", :executable?
   end
