@@ -2,7 +2,7 @@ class SlClassic < Formula
   desc "Steam Locomotive runs across your terminal when you type sl"
   homepage "https://github.com/tecolicom/sl"
   url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.tar.gz"
-  sha256 "86d53debf1f085983cf9214a0302d1ba532c8704b87bffe93d4ef80d9590fd6f"
+  sha256 "c118e433d08885128fb55defb5480e721d78fec6c36081c408f9e94d89ebd575"
   license "BSD-2-Clause"
   version "2026"
 
@@ -19,7 +19,7 @@ class SlClassic < Formula
     binaries = []
     if quiet_system ENV.cc, *flags,
                     "-include", "term.h", "-DCM=cursor_address",
-                    "-o", "sl-1985", "src/sl-1985.c", "-lcurses"
+                    "-o", "sl-1985", "src/sl.c", "-lcurses"
       binaries << "sl-1985"
     else
       opoo "Failed to build sl-1985; installing sl-2010 and sl-2023 only"
