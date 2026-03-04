@@ -1,10 +1,10 @@
 class SlClassic < Formula
   desc "Steam Locomotive runs across your terminal when you type sl"
   homepage "https://github.com/tecolicom/sl"
-  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.0.1.tar.gz"
-  sha256 "0ab618a734dabd02c2579891adeb7c2ab242f44b72c6db8862c5437134f0b5a7"
+  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.1.tar.gz"
+  sha256 "08f9064a33f7247639f89bcc847c1c342e0b948d19a530cd276d64b574257d90"
   license "BSD-2-Clause"
-  version "2026.0.1"
+  version "2026.1"
 
   uses_from_macos "ncurses"
 
@@ -27,7 +27,10 @@ class SlClassic < Formula
 
     system ENV.cc, "-o", "sl-2010", "src/sl-2010.c", "-lcurses"
     system ENV.cc, "-o", "sl-2023", "src/sl-2023.c", "-lcurses"
-    system ENV.cc, "-o", "sl-2026", "src/sl-2026.c", "-lcurses"
+    system ENV.cc, "-DCAR_SWEEP=1", "-DCAR_NULL=0",
+           "-o", "sl-2026",
+           "src/sl-2026.c", "src/sl-couplers.c", "src/car-sweep.c", "src/car-null.c",
+           "-lcurses"
     binaries += ["sl-2010", "sl-2023", "sl-2026"]
     (libexec/"sl-classic").install *binaries
     (libexec/"sl-classic").install "src/sl-screen.sh"
