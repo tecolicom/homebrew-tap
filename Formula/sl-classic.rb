@@ -25,13 +25,8 @@ class SlClassic < Formula
       opoo "Failed to build sl-1985; installing sl-2010 and sl-2023 only"
     end
 
-    system ENV.cc, "-o", "sl-2010", "src/sl-2010.c", "-lcurses"
-    system ENV.cc, "-o", "sl-2023", "src/sl-2023.c", "-lcurses"
-    system ENV.cc, "-DCAR_SWEEP=1", "-DCAR_NULL=0",
-           "-o", "sl-2026",
-           "src/sl-2026.c", "src/sl-couplers.c", "src/car-sweep.c", "src/car-null.c",
-           "-lcurses"
-    binaries += ["sl-2010", "sl-2023", "sl-2026"]
+    system "make", "-C", "src", "sl-2010", "sl-2023", "sl-2026"
+    binaries += ["src/sl-2010", "src/sl-2023", "src/sl-2026"]
     (libexec/"sl-classic").install *binaries
     (libexec/"sl-classic").install "src/sl-screen.sh"
     (libexec/"sl-classic").install "src/sl-sweep.sh"
