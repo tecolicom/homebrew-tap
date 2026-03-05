@@ -1,5 +1,5 @@
 class SlClassic < Formula
-  desc "Steam Locomotive runs across your terminal when you type sl"
+  desc "sl runs across your terminal when you type sl"
   homepage "https://github.com/tecolicom/sl"
   url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.2.tar.gz"
   sha256 "43e13d3626ee6ff21a7869920e5062aa2341f1aee5649f88f412167e1dbfcdae"
