@@ -5,6 +5,7 @@ class SlClassic < Formula
   sha256 "193d473c49f8e655db0672f3818220f66b7437d6abdb0ae943d8b4e77a36aeb3"
   license "BSD-2-Clause"
   version "2026.3"
+  revision 1
 
   depends_on "bash"
   uses_from_macos "ncurses"
