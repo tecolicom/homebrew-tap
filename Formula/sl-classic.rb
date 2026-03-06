@@ -1,11 +1,10 @@
 class SlClassic < Formula
   desc "sl runs across your terminal when you type sl"
   homepage "https://github.com/tecolicom/sl"
-  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.3.tar.gz"
-  sha256 "193d473c49f8e655db0672f3818220f66b7437d6abdb0ae943d8b4e77a36aeb3"
+  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.4.tar.gz"
+  sha256 "81ad466f2d967fafbae481b6cce1fe57688b470615128054d0d53610a21bc134"
   license "BSD-2-Clause"
-  version "2026.3"
-  revision 1
+  version "2026.4"
 
   depends_on "bash"
   uses_from_macos "ncurses"

@@ -56,7 +56,7 @@ jobs:
               continue
             fi
             echo "::group::$name"
-            if brew install "tecolicom/tap/$name"; then
+            if brew install --verbose "tecolicom/tap/$name"; then
               echo "✓ $name passed"
             else
               echo "✗ $name failed"
