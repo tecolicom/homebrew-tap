@@ -6,6 +6,7 @@ class SlClassic < Formula
   license "BSD-2-Clause"
   version "2026.3"
 
+  depends_on "bash"
   uses_from_macos "ncurses"
 
   def install
