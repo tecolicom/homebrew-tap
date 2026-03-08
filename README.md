@@ -10,6 +10,12 @@ brew tap tecolicom/tap
 
 ## Available Formulae
 
+### SL
+
+| Formula | Command | Description |
+|---------|---------|-------------|
+| [sl-classic](https://github.com/tecolicom/sl#readme) | `sl` | SL runs across your terminal |
+
 ### Greple
 
 [greple](https://github.com/kaz-utashiro/greple#readme) is an extensible grep with lexical expression and region handling. The `app-greple` formula installs the `greple` command along with commonly used modules (invoked via `-M` option). Modules marked with ✱ are included in the core App::Greple distribution; others are bundled in the formula. Additional modules can be installed as separate formulae and are automatically discovered at runtime.
