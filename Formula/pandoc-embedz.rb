@@ -6,12 +6,12 @@ class PandocEmbedz < Formula
   license "MIT"
 
   depends_on "pandoc"
-  depends_on "python@3.12"
+  depends_on "python"
 
   def install
-    python = Formula["python@3.12"]
+    python = Formula["python"]
     venv = libexec/"venv"
-    system python.opt_bin/"python3.12", "-m", "venv", venv
+    system python.opt_bin/"python3", "-m", "venv", venv
     system venv/"bin/pip", "install", "."
 
     (bin/"pandoc-embedz").write_env_script(
