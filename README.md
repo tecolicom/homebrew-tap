@@ -100,7 +100,7 @@ brew tap tecolicom/tap
 
 | Formula | Command | Description |
 |---------|---------|-------------|
-| [app-dozo](https://github.com/tecolicom/App-dozo#readme) | [`dozo`](https://metacpan.org/pod/App::dozo) | Dozo, Docker with Zero Overhead |
+| [app-dozo](https://github.com/tecolicom/App-dozo#readme) | [`dozo`](https://metacpan.org/pod/App::dozo) | Dôzo, Docker with Zero Overhead |
 
 ### Development Tools
 
