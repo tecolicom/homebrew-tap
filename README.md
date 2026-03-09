@@ -15,6 +15,7 @@ brew tap tecolicom/tap
 | Formula | Command | Description |
 |---------|---------|-------------|
 | [sl-classic](https://github.com/tecolicom/sl#readme) | `sl` | SL runs across your terminal |
+| | `sl modern` | Toyoda Masashi's SL ([mtoyoda/sl](https://github.com/mtoyoda/sl)) |
 
 ### Paged Output & Markdown
 

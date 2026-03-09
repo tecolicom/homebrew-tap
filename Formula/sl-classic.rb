@@ -1,10 +1,15 @@
 class SlClassic < Formula
   desc "sl runs across your terminal when you type sl"
   homepage "https://github.com/tecolicom/sl"
-  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.5.3.tar.gz"
-  sha256 "ec430f537d049c5966cfb0648ba2ead21bf6dc5808b670337cdb230ce5630c05"
+  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.6.tar.gz"
+  sha256 "1c9fec6f00ecad2a85d64caa2698fc77d677f67af0b911ced8b642ffb5bbc421"
   license "BSD-2-Clause"
-  version "2026.5.3"
+  version "2026.6"
+
+  resource "sl-modern" do
+    url "https://github.com/mtoyoda/sl/archive/923e7d7ebc5c1f009755bdeb789ac25658ccce03.tar.gz"
+    sha256 "0b90e669db80437b106c49536b89a5364b47e6a55d0a0164a8dda5d2dbd2aab0"
+  end
 
   depends_on "bash"
   uses_from_macos "ncurses"
@@ -33,6 +38,11 @@ class SlClassic < Formula
     (libexec/"sl-classic").install "src/sl-screen.sh"
     (libexec/"sl-classic").install "src/sl-sweep.sh"
     (libexec/"sl-classic").install "src/lib"
+    resource("sl-modern").stage do
+      system ENV.cc, "-O", "-Wall", "-o", "sl-modern", "sl.c", "-lncurses"
+      (libexec/"sl-classic").install "sl-modern"
+    end
+
     bin.install "src/sl" => "sl"
     man1.install "src/sl.1"
   end
@@ -45,5 +55,6 @@ class SlClassic < Formula
     assert_predicate libexec/"sl-classic/sl-2010", :executable?
     assert_predicate libexec/"sl-classic/sl-2023", :executable?
     assert_predicate libexec/"sl-classic/sl-2026", :executable?
+    assert_predicate libexec/"sl-classic/sl-modern", :executable?
   end
 end
