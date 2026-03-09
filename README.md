@@ -16,6 +16,15 @@ brew tap tecolicom/tap
 |---------|---------|-------------|
 | [sl-classic](https://github.com/tecolicom/sl#readme) | `sl` | SL runs across your terminal |
 
+### Paged Output & Markdown
+
+| Formula | Command | Description |
+|---------|---------|-------------|
+| [app-nup](https://github.com/tecolicom/App-nup#readme) | [`nup`](https://metacpan.org/pod/App::nup) | N-up contents-aware page-layout |
+| | [`optex -Mup`](https://metacpan.org/pod/App::optex::up) | (bundled optex module) |
+| [app-mdee](https://github.com/tecolicom/App-mdee#readme) | [`mdee`](https://metacpan.org/pod/App::mdee) | Multi-column Markdown viewer with syntax highlighting |
+| | [`greple -Mmd`](https://metacpan.org/pod/App::Greple::md) | (bundled greple module) |
+
 ### Greple
 
 [greple](https://github.com/kaz-utashiro/greple#readme) is an extensible grep with lexical expression and region handling. The `app-greple` formula installs the `greple` command along with commonly used modules (invoked via `-M` option). Modules marked with ✱ are included in the core App::Greple distribution; others are bundled in the formula. Additional modules can be installed as separate formulae and are automatically discovered at runtime.
@@ -80,15 +89,6 @@ brew tap tecolicom/tap
 | | [`ansicut`](https://metacpan.org/dist/App-ansifold/view/script/ansicut) | ANSI-aware cut |
 | | [`ansicolrm`](https://metacpan.org/dist/App-ansifold/view/script/ansicolrm) | ANSI-aware column removal |
 | | [`ansiprintf`](https://metacpan.org/dist/Text-ANSI-Printf/view/script/ansiprintf) | ANSI-aware printf |
-
-### Paged Output & Markdown
-
-| Formula | Command | Description |
-|---------|---------|-------------|
-| [app-nup](https://github.com/tecolicom/App-nup#readme) | [`nup`](https://metacpan.org/pod/App::nup) | N-up contents-aware page-layout |
-| | [`optex -Mup`](https://metacpan.org/pod/App::optex::up) | (bundled optex module) |
-| [app-mdee](https://github.com/tecolicom/App-mdee#readme) | [`mdee`](https://metacpan.org/pod/App::mdee) | Multi-column Markdown viewer with syntax highlighting |
-| | [`greple -Mmd`](https://metacpan.org/pod/App::Greple::md) | (bundled greple module) |
 
 ### Pandoc
 
