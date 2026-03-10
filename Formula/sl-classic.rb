@@ -1,10 +1,10 @@
 class SlClassic < Formula
   desc "sl runs across your terminal when you type sl"
   homepage "https://github.com/tecolicom/sl"
-  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.6.tar.gz"
-  sha256 "1c9fec6f00ecad2a85d64caa2698fc77d677f67af0b911ced8b642ffb5bbc421"
+  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.7.tar.gz"
+  sha256 "39c87a3742627141bb81bee11ff2b9ebe2d2ccc52c2784ad255cf5971ff569bd"
   license "BSD-2-Clause"
-  version "2026.6"
+  version "2026.7"
 
   resource "sl-modern" do
     url "https://github.com/mtoyoda/sl/archive/923e7d7ebc5c1f009755bdeb789ac25658ccce03.tar.gz"
@@ -35,6 +35,7 @@ class SlClassic < Formula
     binaries += ["src/sl-2010", "src/sl-2023", "src/sl-2026"]
     (libexec/"sl-classic").install *binaries
     (libexec/"sl-classic").install "src/getoptlong.sh"
+    (libexec/"sl-classic").install "src/sl-1985.sh"
     (libexec/"sl-classic").install "src/sl-screen.sh"
     (libexec/"sl-classic").install "src/sl-sweep.sh"
     (libexec/"sl-classic").install "src/lib"
