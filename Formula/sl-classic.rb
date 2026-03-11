@@ -1,12 +1,12 @@
 class SlClassic < Formula
   desc "sl runs across your terminal when you type sl"
   homepage "https://github.com/tecolicom/sl"
-  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.7.tar.gz"
-  sha256 "39c87a3742627141bb81bee11ff2b9ebe2d2ccc52c2784ad255cf5971ff569bd"
+  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.7.2.tar.gz"
+  sha256 "9d0ca3d39534d18f6d380cc6643cecf7c670ad33c9a9eb7474829a049a78d742"
   license "BSD-2-Clause"
-  version "2026.7"
+  version "2026.7.2"
 
-  resource "sl-modern" do
+  resource "sl-1992" do
     url "https://github.com/mtoyoda/sl/archive/923e7d7ebc5c1f009755bdeb789ac25658ccce03.tar.gz"
     sha256 "0b90e669db80437b106c49536b89a5364b47e6a55d0a0164a8dda5d2dbd2aab0"
   end
@@ -39,9 +39,9 @@ class SlClassic < Formula
     (libexec/"sl-classic").install "src/sl-screen.sh"
     (libexec/"sl-classic").install "src/sl-sweep.sh"
     (libexec/"sl-classic").install "src/lib"
-    resource("sl-modern").stage do
-      system ENV.cc, "-O", "-Wall", "-o", "sl-modern", "sl.c", "-lncurses"
-      (libexec/"sl-classic").install "sl-modern"
+    resource("sl-1992").stage do
+      system ENV.cc, "-O", "-Wall", "-o", "sl-1992", "sl.c", "-lncurses"
+      (libexec/"sl-classic").install "sl-1992"
     end
 
     bin.install "src/sl" => "sl"
@@ -56,6 +56,6 @@ class SlClassic < Formula
     assert_predicate libexec/"sl-classic/sl-2010", :executable?
     assert_predicate libexec/"sl-classic/sl-2023", :executable?
     assert_predicate libexec/"sl-classic/sl-2026", :executable?
-    assert_predicate libexec/"sl-classic/sl-modern", :executable?
+    assert_predicate libexec/"sl-classic/sl-1992", :executable?
   end
 end
