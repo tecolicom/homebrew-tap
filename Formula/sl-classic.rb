@@ -15,6 +15,10 @@ class SlClassic < Formula
   uses_from_macos "ncurses"
 
   def install
+    # Prevent superenv from injecting -mbranch-protection=standard
+    # which causes "Illegal instruction" in Docker on arm64
+    ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
+
     flags = ["-std=c89", "-Wno-implicit-int", "-Wno-implicit-function-declaration"]
     if ENV.compiler == :clang
       flags << "-Wno-incompatible-function-pointer-types"
