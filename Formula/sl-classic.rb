@@ -1,10 +1,10 @@
 class SlClassic < Formula
   desc "sl runs across your terminal when you type sl"
   homepage "https://github.com/tecolicom/sl"
-  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.7.2.tar.gz"
-  sha256 "9d0ca3d39534d18f6d380cc6643cecf7c670ad33c9a9eb7474829a049a78d742"
+  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.8.tar.gz"
+  sha256 "5d469174fef38c64ce0289581a71808a3e445016973d01c82daa7123baffdbcb"
   license "BSD-2-Clause"
-  version "2026.7.2"
+  version "2026.8"
 
   resource "sl-1992" do
     url "https://github.com/mtoyoda/sl/archive/923e7d7ebc5c1f009755bdeb789ac25658ccce03.tar.gz"
@@ -38,7 +38,12 @@ class SlClassic < Formula
     (libexec/"sl-classic").install "src/sl-1985.sh"
     (libexec/"sl-classic").install "src/sl-screen.sh"
     (libexec/"sl-classic").install "src/sl-sweep.sh"
-    (libexec/"sl-classic").install "src/lib"
+
+    # Install Perl dependencies into Cellar
+    system "curl", "-sL", "https://cpanmin.us/", "-o", buildpath/"cpanm"
+    system "perl", buildpath/"cpanm", "--notest",
+           "-l", libexec/"sl-classic/perl5", "--installdeps", buildpath/"src"
+
     resource("sl-1992").stage do
       system ENV.cc, "-O", "-Wall", "-o", "sl-1992", "sl.c", "-lncurses"
       (libexec/"sl-classic").install "sl-1992"
