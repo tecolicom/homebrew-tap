@@ -1,4 +1,4 @@
-class LessPageAlign < Formula
+class Less < Formula
   desc "Pager less with --page-align (aligned search results and line jumps)"
   homepage "https://github.com/kaz-utashiro/less"
   url "https://github.com/kaz-utashiro/less/archive/c0b2314a5b208e6d4afe8d103d9372451a5c0dd2.tar.gz"
