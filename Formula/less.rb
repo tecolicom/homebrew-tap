@@ -16,8 +16,10 @@ class Less < Formula
     # which causes "Illegal instruction" in Docker on arm64
     ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
 
-    # A git checkout lacks files that are pre-generated in release tarballs.
-    system "make", "-f", "Makefile.aut", "funcs.h", "help.c"
+    # A git checkout lacks files that are pre-generated in release tarballs:
+    # funcs.h, help.c, the nroff man pages, and the configure script.
+    system "make", "-f", "Makefile.aut", "funcs.h", "help.c",
+           "less.nro", "lesskey.nro", "lessecho.nro"
     system "autoheader"
     system "autoconf"
 
