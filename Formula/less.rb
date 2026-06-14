@@ -1,9 +1,9 @@
 class Less < Formula
   desc "Pager less with --page-align (aligned search results and line jumps)"
   homepage "https://github.com/kaz-utashiro/less"
-  url "https://github.com/kaz-utashiro/less/archive/c0b2314a5b208e6d4afe8d103d9372451a5c0dd2.tar.gz"
+  url "https://github.com/kaz-utashiro/less/archive/d1addda8f114824eac63c99a401b87237e33a916.tar.gz"
   version "705x"
-  sha256 "28543245849955555ace96c922b1e277f0749d9eb376a6bc0b70e3ed0df06e58"
+  sha256 "4d928d8c9bf499339cb582267f216100a6824dde30374032e524cb32c59b06b1"
   license any_of: ["GPL-3.0-or-later", "BSD-2-Clause"]
 
   depends_on "autoconf" => :build
