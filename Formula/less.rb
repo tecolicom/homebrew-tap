@@ -18,8 +18,12 @@ class Less < Formula
 
     # A git checkout lacks files that are pre-generated in release tarballs:
     # funcs.h, help.c, the nroff man pages, and the configure script.
-    system "make", "-f", "Makefile.aut", "funcs.h", "help.c",
-           "less.nro", "lesskey.nro", "lessecho.nro"
+    # Unset SOURCE_DATE_EPOCH for this step: the man-page rule feeds it to
+    # `date -d@`, which macOS's BSD date rejects, blanking the man date.
+    with_env(SOURCE_DATE_EPOCH: nil) do
+      system "make", "-f", "Makefile.aut", "funcs.h", "help.c",
+             "less.nro", "lesskey.nro", "lessecho.nro"
+    end
     system "autoheader"
     system "autoconf"
 
