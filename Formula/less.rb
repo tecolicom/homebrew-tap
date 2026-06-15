@@ -1,9 +1,9 @@
 class Less < Formula
-  desc "Pager less with --page-align to snap search results to record boundaries"
+  desc "Pager less with --align-record to snap search results to record boundaries"
   homepage "https://github.com/kaz-utashiro/less"
-  url "https://github.com/kaz-utashiro/less/archive/922633a094d8dd423858ab0a4940eb40049d2a2c.tar.gz"
+  url "https://github.com/kaz-utashiro/less/archive/6ada0b5bb1102271d24664b0022bca4747b0062f.tar.gz"
   version "705x"
-  sha256 "4d7ac6a25ff80bfd41dfef2fdf7c4db56a07cc2da6776c23af22fcb10bf14391"
+  sha256 "ce091a2ca5bebfce236b12957fcb80d13dfd19f1797f99059a796544a2ef16ed"
   license any_of: ["GPL-3.0-or-later", "BSD-2-Clause"]
 
   depends_on "autoconf" => :build
@@ -38,7 +38,7 @@ class Less < Formula
 
   test do
     assert_match "less", shell_output("#{bin}/less --version")
-    # --page-align is accepted (an unknown option would error out)
-    system bin/"less", "--page-align=10", "-V"
+    # --align-record is accepted (an unknown option would error out)
+    system bin/"less", "--align-record=10", "-V"
   end
 end
