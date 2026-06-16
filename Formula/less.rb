@@ -1,9 +1,9 @@
 class Less < Formula
   desc "Pager less with --align-record to snap search results to record boundaries"
   homepage "https://github.com/kaz-utashiro/less"
-  url "https://github.com/kaz-utashiro/less/archive/6ada0b5bb1102271d24664b0022bca4747b0062f.tar.gz"
+  url "https://github.com/kaz-utashiro/less/archive/28fb7fba7b5bbb1d25fee9dc30b6e8054f0c87ec.tar.gz"
   version "705x"
-  sha256 "ce091a2ca5bebfce236b12957fcb80d13dfd19f1797f99059a796544a2ef16ed"
+  sha256 "ad9707155044c34527c9fa2b40fe26cf6f68e28d67d5a0cd70f2b7b3d07f7c65"
   license any_of: ["GPL-3.0-or-later", "BSD-2-Clause"]
 
   depends_on "autoconf" => :build
