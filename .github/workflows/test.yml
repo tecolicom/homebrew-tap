@@ -42,12 +42,18 @@ jobs:
           # This image is still 4.6.20 with homebrew-core frozen at
           # 2025-11-03, which cannot pour bottles built after that, and
           # HOMEBREW_NO_AUTO_UPDATE keeps it from catching up by itself.
+          #
+          # The job runs with HOME on a root-owned mount, while Homebrew 6
+          # wants to create $HOME/.homebrew.  Point it back at the home
+          # directory the image provides.
+          export HOME=/home/linuxbrew
           brew update
           brew tap tecolicom/tap
 
       - name: Install all formulas
         shell: bash
         run: |
+          if [ -n "${{ matrix.container }}" ]; then export HOME=/home/linuxbrew; fi
           tap_dir="$(brew --repository tecolicom/tap)"
           failed=()
           for rb in "$tap_dir"/Formula/*.rb; do
