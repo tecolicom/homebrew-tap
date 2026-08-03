@@ -37,7 +37,13 @@ jobs:
         if: ${{ !matrix.container }}
       - name: Set up Homebrew tap
         if: ${{ matrix.container }}
-        run: brew tap tecolicom/tap
+        run: |
+          # Homebrew stopped publishing its Docker images in November 2025.
+          # This image is still 4.6.20 with homebrew-core frozen at
+          # 2025-11-03, which cannot pour bottles built after that, and
+          # HOMEBREW_NO_AUTO_UPDATE keeps it from catching up by itself.
+          brew update
+          brew tap tecolicom/tap
 
       - name: Install all formulas
         shell: bash
