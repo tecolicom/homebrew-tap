@@ -49,6 +49,10 @@ jobs:
           export HOME=/home/linuxbrew
           brew update
           brew tap tecolicom/tap
+          # Homebrew 6 refuses to load a formula pulled in as a dependency
+          # from an untrusted tap, even though the one named on the command
+          # line is trusted automatically.
+          brew trust tecolicom/tap
 
       - name: Install all formulas
         shell: bash
