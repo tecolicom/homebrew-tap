@@ -13,10 +13,6 @@ class SlClassic < Formula
 
   depends_on "bash"
   uses_from_macos "ncurses"
-  # cpanm builds XS modules and needs the Perl headers, which the system
-  # perl does not always provide.  Without this, Term::ReadKey fails with
-  # "EXTERN.h: No such file or directory".
-  uses_from_macos "perl"
 
   def install
     # Prevent superenv from injecting -mbranch-protection=standard
@@ -47,10 +43,26 @@ class SlClassic < Formula
     (libexec/"sl-classic").install "src/sl-screen.sh"
     (libexec/"sl-classic").install "src/sl-sweep.sh"
 
-    # Install Perl dependencies into Cellar
-    system "curl", "-sL", "https://cpanmin.us/", "-o", buildpath/"cpanm"
-    system "perl", buildpath/"cpanm", "--notest",
-           "-l", libexec/"sl-classic/perl5", "--installdeps", buildpath/"src"
+    # Install Perl dependencies into Cellar.  They serve a single purpose,
+    # asking the terminal for its background luminance, and sl skips that
+    # when they are missing, so build them with whatever perl is around
+    # rather than depending on one.
+    #
+    # Term::ReadKey is XS, and superenv hides /usr from the compiler, so
+    # the system perl's own CORE headers become invisible and the build
+    # fails with "EXTERN.h: No such file or directory".  Put /usr/bin in
+    # front for cpanm alone; the C parts above keep the Homebrew shims.
+    if which("perl")
+      system "curl", "-sL", "https://cpanmin.us/", "-o", buildpath/"cpanm"
+      ok = with_env(PATH: "/usr/bin:#{ENV["PATH"]}") do
+        quiet_system "perl", buildpath/"cpanm", "--notest",
+                     "-l", libexec/"sl-classic/perl5",
+                     "--installdeps", buildpath/"src"
+      end
+      opoo "Perl modules unavailable; terminal luminance detection disabled" unless ok
+    else
+      opoo "perl not found; terminal luminance detection disabled"
+    end
 
     resource("sl-1992").stage do
       system ENV.cc, "-O", "-Wall", "-o", "sl-1992", "sl.c", "-lncurses"
