@@ -12,6 +12,13 @@ class AppWeek < Formula
     # which causes "Illegal instruction" in Docker on arm64
     ENV["HOMEBREW_CCCFG"] = ENV.fetch("HOMEBREW_CCCFG", "").delete("b")
 
+    # Bit::Vector 7.4, pulled in by Date::Calc, declares "enum { false,
+    # true }", which C23 rejects since those became keywords.  GCC 15 and
+    # later default to C23.  MakeMaker builds XS with $Config{optimize},
+    # not CFLAGS, so override it here.  The backslash keeps MakeMaker
+    # from splitting the value on the space.
+    ENV["PERL_MM_OPT"] = "OPTIMIZE=-O2\\ -std=gnu17"
+
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
     system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
