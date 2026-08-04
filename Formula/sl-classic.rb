@@ -12,6 +12,10 @@ class SlClassic < Formula
   end
 
   depends_on "bash"
+  # cpanm builds XS modules and needs the Perl headers.  Without this,
+  # the system perl is picked up and Term::ReadKey fails to compile with
+  # "EXTERN.h: No such file or directory".
+  depends_on "perl"
   uses_from_macos "ncurses"
 
   def install
