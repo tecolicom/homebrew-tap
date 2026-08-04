@@ -1,10 +1,10 @@
 class SlClassic < Formula
   desc "sl runs across your terminal when you type sl"
   homepage "https://github.com/tecolicom/sl"
-  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.10.1.tar.gz"
-  sha256 "a88761395ed373b6b957854e8275900708d11b9138f9aa6110fb4c2ce4f62c32"
+  url "https://github.com/tecolicom/sl/archive/refs/tags/v2026.11.tar.gz"
+  sha256 "710e1c4ea329a7a25c9b278d51c6441637d26eecd1882c8832fc090f5ab3fc6a"
   license "BSD-2-Clause"
-  version "2026.10.1"
+  version "2026.11"
 
   resource "sl-1992" do
     url "https://github.com/mtoyoda/sl/archive/923e7d7ebc5c1f009755bdeb789ac25658ccce03.tar.gz"
