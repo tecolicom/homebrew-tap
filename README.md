@@ -129,6 +129,36 @@ brew install tecolicom/tap/app-ansi-tools
 brew install tecolicom/tap/app-mdee
 ```
 
+## Troubleshooting
+
+### Errors after a Perl upgrade
+
+Formulae in this tap bundle their Perl dependencies under `libexec`, including
+compiled XS modules. When Homebrew upgrades Perl to a new minor version, those
+modules no longer match the running interpreter and the commands stop working.
+
+The failure is usually reported as:
+
+```
+Perl API version v5.42.0 of ReadKey.c does not match v5.44.0
+```
+
+but it can also surface as an unrelated-looking error — a tool may report a
+missing theme, a missing file, or simply produce no output — because the
+underlying load failure is swallowed by the calling code.
+
+Reinstall the affected formula to rebuild it against the current Perl:
+
+```bash
+brew reinstall tecolicom/tap/app-greple
+```
+
+To rebuild everything installed from this tap:
+
+```bash
+brew list --full-name | grep '^tecolicom/' | xargs brew reinstall
+```
+
 ## Links
 
 - [tecolicom on GitHub](https://github.com/tecolicom)
