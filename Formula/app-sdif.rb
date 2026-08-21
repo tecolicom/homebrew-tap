@@ -4,6 +4,7 @@ class AppSdif < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-sdif-4.49.tar.gz"
   sha256 "347dd8dd87a0863dd1afc207c5b3110b7329a462ed18aba65fc36896b71b7d8c"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
 

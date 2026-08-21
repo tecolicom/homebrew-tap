@@ -4,6 +4,7 @@ class AppOptexScroll < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-optex-scroll-0.9902.tar.gz"
   sha256 "178c61ea5e3273021e44054b42626343887df6afb3755a33f7d6054bd6236ff9"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
   depends_on "tecolicom/tap/app-optex"

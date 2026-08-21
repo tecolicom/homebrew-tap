@@ -4,6 +4,7 @@ class AppGreple < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-Greple-10.03.tar.gz"
   sha256 "ace2ce01a766c937fb87da72249e0e8534148395e2ea14e9d05a2f80eb5358ce"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
 

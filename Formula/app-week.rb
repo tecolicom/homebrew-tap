@@ -4,6 +4,7 @@ class AppWeek < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-week-1.07.tar.gz"
   sha256 "6a4fcb32b6f5eb63ffece5cfe6aba10252889f7b0b5372b1f92b7334ff1a7425"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
 

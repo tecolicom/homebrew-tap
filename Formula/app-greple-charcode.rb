@@ -4,6 +4,7 @@ class AppGrepleCharcode < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-Greple-charcode-0.9909.tar.gz"
   sha256 "1e486e33f017a5d57f66a506b7c36fc016d47ed9d02a90b356af54bdab21e966"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
   depends_on "tecolicom/tap/app-greple"

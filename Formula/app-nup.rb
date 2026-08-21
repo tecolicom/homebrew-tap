@@ -4,6 +4,7 @@ class AppNup < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-1.08.tar.gz"
   sha256 "8dd44bedb2b9c12b4d6113179c7839248d685b0a6bf7a4f95f72c1e1f5962fba"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
 

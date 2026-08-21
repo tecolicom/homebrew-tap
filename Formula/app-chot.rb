@@ -4,6 +4,7 @@ class AppChot < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-chot-1.04.tar.gz"
   sha256 "61b8b912477119baee7cfc0dbd7370a42d3fcfc92dab2c20de39a87850380eed"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
   head "https://github.com/tecolicom/App-chot.git", branch: "main"
 
   depends_on "bat"

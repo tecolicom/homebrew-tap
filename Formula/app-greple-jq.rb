@@ -4,6 +4,7 @@ class AppGrepleJq < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-Greple-jq-0.06.tar.gz"
   sha256 "033059613bc402cbc2ca2ccc242e205aa2e7b18a25b76ccba15a51012e219069"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
   depends_on "jq"

@@ -4,6 +4,7 @@ class AppAnsiTools < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-ansicolumn-1.5701.tar.gz"
   sha256 "383e38541eafb5475944c7c88f647c43e8d1dcfe03ed3f3880000dc7d045af5c"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
 

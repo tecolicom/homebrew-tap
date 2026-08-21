@@ -4,6 +4,7 @@ class AppGrepleSubstDesumasu < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-Greple-subst-desumasu-0.07.tar.gz"
   sha256 "063528e7e2f2dba4938d1b5c91f3e27e3b20213ab522bcadd1fa873a407027c4"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
   depends_on "tecolicom/tap/app-greple"

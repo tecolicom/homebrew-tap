@@ -4,6 +4,7 @@ class AppGrepleMsdoc < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-Greple-msdoc-1.07.tar.gz"
   sha256 "0466ceaa5c806b9a5095b4351d1d11561962509bd883caf90d3f832dd90435da"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
   depends_on "tecolicom/tap/app-greple"
