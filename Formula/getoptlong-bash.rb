@@ -17,6 +17,12 @@ class GetoptlongBash < Formula
   end
 
   test do
-    system bin/"getoptlong", "--version"
+    (testpath/"t.sh").write <<~EOS
+      declare -A OPTS=( [ image | I : # image ]= )
+      . #{bin}/getoptlong.sh OPTS "$@"
+      echo "image=$image"
+    EOS
+    output = shell_output("#{formula_opt_bin("bash")}/bash #{testpath}/t.sh -I alpine")
+    assert_equal "image=alpine\n", output
   end
 end
