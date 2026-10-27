@@ -1,8 +1,8 @@
 class AppDozo < Formula
   desc "Dozo, Docker with Zero Overhead"
   homepage "https://github.com/tecolicom/App-dozo"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-dozo-1.01.tar.gz"
-  sha256 "8ec23afda70129d43f45422de2465b9a1bc0166728579a42bd0343db8e4facaa"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-dozo-1.02.tar.gz"
+  sha256 "58d783ec87af79e8d96d149c5c98164d1abbf984b028762adb467a2dc1b30573"
   license "MIT"
 
   depends_on "tecolicom/tap/getoptlong-bash"

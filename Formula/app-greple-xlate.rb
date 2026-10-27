@@ -1,10 +1,9 @@
 class AppGrepleXlate < Formula
   desc "Greple module for translation support"
   homepage "https://github.com/kaz-utashiro/App-Greple-xlate"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-Greple-xlate-0.9924.tar.gz"
-  sha256 "15660c8576766390dbb20e5ccb095c15ed4017ecf7a1e00a28cbf4795e763d99"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-Greple-xlate-2.03.tar.gz"
+  sha256 "81947b72ecbaf5f1fbb1a1ffe48ec2a6a77f271f934091a3fdd6b3967353cfef"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
-  revision 1
 
   depends_on "cpm"
   depends_on "tecolicom/tap/app-greple"
