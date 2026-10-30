@@ -1,8 +1,8 @@
 class AppNup < Formula
   desc "n-up, multi-column paged output for commands and files"
   homepage "https://github.com/tecolicom/App-nup"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-1.09.tar.gz"
-  sha256 "d962821365fc6d3705021789a4344ca3cfe0878365452ed24e5667a44dc1f886"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-1.10.tar.gz"
+  sha256 "b050c7647a169839272d823c8f7b21e712bd35cdd943606b0c387e16dcc54e0c"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
   depends_on "cpm"
