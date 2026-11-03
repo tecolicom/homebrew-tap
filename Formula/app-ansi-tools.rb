@@ -13,8 +13,8 @@ class AppAnsiTools < Formula
   end
 
   resource "App-ansifold" do
-    url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-ansifold-1.35.tar.gz"
-    sha256 "042d9efc3fbd7ab8c6c77df110f6fe9a875ddd73dfd67fc183b0478fe6723daa"
+    url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-ansifold-1.38.tar.gz"
+    sha256 "ce72dda301db782b37d3e524f97b32db3b253f732b377149d41899b6dc457e5e"
   end
 
   resource "Text-ANSI-Printf" do

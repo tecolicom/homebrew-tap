@@ -1,10 +1,9 @@
 class AppGreple < Formula
   desc "Extensible grep with lexical expression and region handling"
   homepage "https://github.com/kaz-utashiro/greple"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-Greple-10.03.tar.gz"
-  sha256 "ace2ce01a766c937fb87da72249e0e8534148395e2ea14e9d05a2f80eb5358ce"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-Greple-10.05.tar.gz"
+  sha256 "ee604c51b1fb97074d0abf6d9825593dcf1c90f5e594697e4359c6e5de3269ff"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
-  revision 1
 
   depends_on "cpm"
 

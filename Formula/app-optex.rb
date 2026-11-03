@@ -1,10 +1,9 @@
 class AppOptex < Formula
   desc "General-purpose command option wrapper"
   homepage "https://github.com/kaz-utashiro/optex"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-optex-1.0601.tar.gz"
-  sha256 "4c5989a62deabae2116064ae77c5630ef9e3908988fbc8216af2742202174827"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-optex-1.07.tar.gz"
+  sha256 "1afb21931da089179ae44e660d6cfb80ce29a11ca013d0227e236189a8ad8c3b"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
-  revision 1
 
   depends_on "cpm"
 

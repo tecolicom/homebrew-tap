@@ -1,8 +1,8 @@
 class AppOptexTextconv < Formula
   desc "optex module to replace document file by its text contents"
   homepage "https://github.com/kaz-utashiro/optex-textconv"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-optex-textconv-1.07.tar.gz"
-  sha256 "a3f7571fd6e61ee9bccfa1b1066023c17ee903b392ec80861c6e788445f53e3e"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-optex-textconv-1.08.tar.gz"
+  sha256 "aa5b4a85f688576aae11a088f331cbac6c2b82d53990a4c2943c0d193b96826d"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
   depends_on "cpm"
