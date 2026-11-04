@@ -12,6 +12,7 @@
 #   make sync-<name>   - Sync single formula
 #   make audit-<name>  - Audit single formula
 #   make build-<name>  - Build single formula
+#   make upgrade-<name> - Upgrade single formula as users do, and test it
 #   make test-<name>   - Test single formula
 
 TAP_DIR = /opt/homebrew/Library/Taps/tecolicom/homebrew-tap
@@ -60,4 +61,14 @@ build-%: sync-%
 	brew reinstall --build-from-source tecolicom/tap/$*
 
 test-%: sync-%
+	brew test tecolicom/tap/$*
+
+# brew update stashes the copy in the tap directory, so it must not run here.
+upgrade-%: export HOMEBREW_NO_AUTO_UPDATE = 1
+upgrade-%: sync-%
+	@if brew outdated --verbose tecolicom/tap/$*; then \
+		echo "$*: not installed, or not older than the formula" >&2; \
+		exit 1; \
+	fi
+	brew upgrade tecolicom/tap/$*
 	brew test tecolicom/tap/$*

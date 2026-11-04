@@ -12,6 +12,9 @@ make all       # 上記すべてを順に実行
 # 単一フォーミュラのテスト
 make build-app-greple
 make test-app-greple
+
+# formula を更新したとき: brew upgrade で更新できることも確かめる
+make upgrade-app-greple
 ```
 
 ## フォーミュラ作成時の注意点
