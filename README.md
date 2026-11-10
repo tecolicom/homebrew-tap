@@ -90,6 +90,7 @@ brew tap tecolicom/tap
 | | [`ansicut`](https://metacpan.org/dist/App-ansifold/view/script/ansicut) | ANSI-aware cut |
 | | [`ansicolrm`](https://metacpan.org/dist/App-ansifold/view/script/ansicolrm) | ANSI-aware column removal |
 | | [`ansiprintf`](https://metacpan.org/dist/Text-ANSI-Printf/view/script/ansiprintf) | ANSI-aware printf |
+| [app-ansi2pdf](https://github.com/tecolicom/App-ansi2pdf#readme) | [`ansi2pdf`](https://github.com/tecolicom/App-ansi2pdf#readme) | Render terminal output with ANSI sequences to PDF |
 
 ### Pandoc
 
