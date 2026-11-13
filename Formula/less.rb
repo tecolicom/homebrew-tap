@@ -1,9 +1,9 @@
 class Less < Formula
   desc "Pager less with --align-record and --align-shift for paged layouts"
   homepage "https://github.com/kaz-utashiro/less"
-  url "https://github.com/kaz-utashiro/less/archive/45c57e13ed553a88493b8ab770ec8c0fa5fc0c9f.tar.gz"
-  version "713x.1"
-  sha256 "9edc74b41c52b4b9bdfbb2b30e1744b97729e189f27e2c1a222e30dd9be43325"
+  url "https://github.com/kaz-utashiro/less/archive/76562bb51242824db3776289711e7d4d2ddd20ca.tar.gz"
+  version "713x.2"
+  sha256 "fde4aef2f1186ce4bc8b49fb6fd890ac97f90a7bdf78f64683a9120b058d9fa6"
   license any_of: ["GPL-3.0-or-later", "BSD-2-Clause"]
 
   depends_on "autoconf" => :build
