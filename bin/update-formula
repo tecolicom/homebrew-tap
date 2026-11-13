@@ -40,13 +40,24 @@ update_cpan_dist() {
     local sha256
     sha256=$(curl -sL "$url" | shasum -a 256 | cut -d' ' -f1)
 
-    # Find the specific URL line for this dist and update it + next sha256 line
+    # Find the specific URL line for this dist and update it + the sha256
+    # line which follows.  A version line may come between them.
     local url_line sha_line
     url_line=$(grep -n "${dist_name}-" "$formula_file" | head -1 | cut -d: -f1)
-    sha_line=$((url_line + 1))
+    sha_line=$(awk -v n="$url_line" 'NR > n && /^ *sha256 "/ { print NR; exit }' "$formula_file")
 
     sed -i '' "${url_line}s|url \".*\"|url \"${url}\"|" "$formula_file"
     sed -i '' "${sha_line}s|sha256 \".*\"|sha256 \"${sha256}\"|" "$formula_file"
+
+    # Homebrew compares the parts of a version as integers, so 1.63 is
+    # older than 1.6201 for it.  A formula with a version line gives the
+    # decimal version in six digits (1.63 -> 1.630000), which is in the
+    # same order as Perl takes it (v1.630.0).
+    if [[ "$version" =~ ^[0-9]+\.[0-9]{1,6}$ ]]; then
+        local normal
+        normal=$(printf '%.6f' "$version")
+        sed -i '' "${url_line},${sha_line}s|^\( *version \)\".*\"|\1\"${normal}\"|" "$formula_file"
+    fi
 
     return 0
 }
