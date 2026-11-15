@@ -1,8 +1,8 @@
 class AppMdee < Formula
   desc "em·dee, Markdown Easy on the Eyes"
   homepage "https://github.com/tecolicom/App-mdee"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-mdee-1.18.tar.gz"
-  sha256 "acfc0c3764385adc50273580ed8ed74413108d84f6654cca1b85a58f0051401d"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-mdee-1.19.tar.gz"
+  sha256 "9ee224af84f8f4b7eb5fb57b887608b7494d099921e8608357d0facf4a434cac"
   license "MIT"
 
   depends_on "cpm"
@@ -17,10 +17,12 @@ class AppMdee < Formula
 
     system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
+    # the nup in libexec/bin runs the less of app-nup, as nup of app-nup does
+    less_bin = formula_opt_libexec("tecolicom/tap/app-nup")/"less/bin"
     (bin/"mdee").write <<~SH
       #!/bin/bash
       export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
-      export PATH="#{libexec}/bin:$PATH"
+      export PATH="#{less_bin}:#{libexec}/bin:$PATH"
       exec "#{libexec}/bin/mdee" "$@"
     SH
     (bin/"mdee").chmod 0755

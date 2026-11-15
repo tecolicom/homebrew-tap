@@ -1,11 +1,22 @@
 class AppNup < Formula
   desc "n-up, multi-column paged output for commands and files"
   homepage "https://github.com/tecolicom/App-nup"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-1.13.tar.gz"
-  sha256 "07c345533d05d5708fc6dd494a1e73237262ba9fa315fafd227ad31c21e9cd21"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-1.17.tar.gz"
+  sha256 "65146964ea952fece7c661a3e6134066ed90f555c1f5c61a2df45fec35d245a7"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
+  depends_on "autoconf" => :build
   depends_on "cpm"
+  uses_from_macos "ncurses"
+
+  # The less of this tap, for nup alone: it is put in libexec/less, not
+  # linked, so it does not conflict with the less of Homebrew.  Keep it
+  # the same as Formula/less.rb.
+  resource "less" do
+    url "https://github.com/kaz-utashiro/less/archive/82a7a5e7c5245bac3fcd78b6f3f2757bef9602dc.tar.gz"
+    version "713x.5"
+    sha256 "a24607e35764444fdbcc82afb4f9b917a6ddaaa8a7f8aa27f343f140deb36859"
+  end
 
   def install
     # Prevent superenv from injecting -mbranch-protection=standard
@@ -16,10 +27,23 @@ class AppNup < Formula
 
     system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
+    # Built as in Formula/less.rb
+    resource("less").stage do
+      with_env(SOURCE_DATE_EPOCH: nil) do
+        system "make", "-f", "Makefile.aut", "funcs.h", "help.c", "lessmsg.inc",
+               "less.nro", "lesskey.nro", "lessecho.nro"
+      end
+      system "autoheader"
+      system "autoconf"
+      system "./configure", "--prefix=#{libexec}/less"
+      system "make"
+      system "make", "install"
+    end
+
     (bin/"nup").write <<~SH
       #!/bin/bash
       export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
-      export PATH="#{libexec}/bin:$PATH"
+      export PATH="#{libexec}/less/bin:#{libexec}/bin:$PATH"
       exec "#{libexec}/bin/nup" "$@"
     SH
     (bin/"nup").chmod 0755
@@ -29,5 +53,7 @@ class AppNup < Formula
 
   test do
     system bin/"nup", "--version"
+    # nup finds the less of libexec/less, which has --align-shift
+    system libexec/"less/bin/less", "--align-shift", "-V"
   end
 end
