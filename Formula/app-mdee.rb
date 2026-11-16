@@ -4,6 +4,7 @@ class AppMdee < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-mdee-1.19.tar.gz"
   sha256 "9ee224af84f8f4b7eb5fb57b887608b7494d099921e8608357d0facf4a434cac"
   license "MIT"
+  revision 1
 
   depends_on "cpm"
   depends_on "tecolicom/tap/app-nup"
@@ -17,12 +18,12 @@ class AppMdee < Formula
 
     system "cpm", "install", "--resolver", "metacpan", "--no-default-resolvers", "--show-build-log-on-failure", "--home", buildpath.parent/".cpm", "--man-pages", "-L", libexec, "."
 
-    # the nup in libexec/bin runs the less of app-nup, as nup of app-nup does
-    less_bin = formula_opt_libexec("tecolicom/tap/app-nup")/"less/bin"
+    # nup of app-nup, which runs the less of app-nup
+    nup_bin = formula_opt_bin("tecolicom/tap/app-nup")
     (bin/"mdee").write <<~SH
       #!/bin/bash
       export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
-      export PATH="#{less_bin}:#{libexec}/bin:$PATH"
+      export PATH="#{nup_bin}:#{libexec}/bin:$PATH"
       exec "#{libexec}/bin/mdee" "$@"
     SH
     (bin/"mdee").chmod 0755
