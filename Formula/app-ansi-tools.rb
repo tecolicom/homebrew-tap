@@ -1,9 +1,9 @@
 class AppAnsiTools < Formula
   desc "ANSI terminal sequence aware text processing tools"
   homepage "https://github.com/tecolicom"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-ansicolumn-1.63.tar.gz"
-  version "1.630000"
-  sha256 "89659d3d8f57feab9f65d2918c13c491a7d6dfeade6ceb9e38315e52e0dcee45"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-ansicolumn-1.66.tar.gz"
+  version "1.660000"
+  sha256 "68463c51670a409971478146ddf68b5967ac6bdd5f42ac1bdb7f005903bd4367"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
   depends_on "cpm"

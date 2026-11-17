@@ -1,12 +1,16 @@
 class AppNup < Formula
   desc "n-up, multi-column paged output for commands and files"
   homepage "https://github.com/tecolicom/App-nup"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-1.17.tar.gz"
-  sha256 "65146964ea952fece7c661a3e6134066ed90f555c1f5c61a2df45fec35d245a7"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-1.19.tar.gz"
+  sha256 "25e37758aa369f5254568ca4c8ab55cee829026072664dae4a44d06cf78e7482"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
   depends_on "autoconf" => :build
   depends_on "cpm"
+  # The highlighter of files, by default.  It has no bottle on Intel
+  # macOS and on Sonoma or older, where it is built with GHC: nup works
+  # without it, with no colors (--without-skylighting).
+  depends_on "skylighting" => :recommended
   uses_from_macos "ncurses"
 
   # The less of this tap, for nup alone: it is put in libexec/less, not
