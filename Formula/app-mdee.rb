@@ -1,8 +1,8 @@
 class AppMdee < Formula
   desc "em·dee, Markdown Easy on the Eyes"
   homepage "https://github.com/tecolicom/App-mdee"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-mdee-1.24.tar.gz"
-  sha256 "b871f675ce438f4b949e1f5395376670e1da9729e710a56629e594f324f1fd0b"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-mdee-1.25.tar.gz"
+  sha256 "1f4e7a26459479fcb8c87aee3344dc7362bbe0a23d547c5e383fd5caff5df434"
   license "MIT"
 
   depends_on "cpm"
