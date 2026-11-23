@@ -114,7 +114,7 @@ brew tap tecolicom/tap
 
 | Formula | Commands | Description |
 |---------|----------|-------------|
-| [getoptlong-bash](https://github.com/tecolicom/Getopt-Long-Bash#readme) | [`getoptlong`](https://metacpan.org/pod/Getopt::Long::Bash), `getoptlong.sh` | Getopt::Long style option parser for Bash |
+| [getoptlong-bash](https://github.com/tecolicom/getoptlong-bash#readme) | [`getoptlong`](https://metacpan.org/pod/Getopt::Long::Bash), `getoptlong.sh` | Getopt::Long style option parser for Bash |
 
 ## Usage Examples
 

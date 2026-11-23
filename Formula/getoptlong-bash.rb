@@ -1,6 +1,6 @@
 class GetoptlongBash < Formula
   desc "Getopt::Long style option parser for Bash scripts"
-  homepage "https://github.com/tecolicom/Getopt-Long-Bash"
+  homepage "https://github.com/tecolicom/getoptlong-bash"
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/Getopt-Long-Bash-1.5.0.tar.gz"
   sha256 "ea343934006dea74cb6e73d2c10a1c23dac041cd94b84745b32e8be6b15e9633"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
