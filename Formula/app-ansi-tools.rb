@@ -5,6 +5,7 @@ class AppAnsiTools < Formula
   version "1.710000"
   sha256 "fe89e627dbdaba9c309e9e92a9d83e2732df5a7a31dbb427f4a51771aa814953"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
+  revision 1
 
   depends_on "cpm"
 
@@ -16,6 +17,11 @@ class AppAnsiTools < Formula
   resource "App-ansifold" do
     url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-ansifold-1.39.tar.gz"
     sha256 "2baf3319ab887b2cb1a2c4d8d5c69ed8c04a1c78dbd71c0ace05ced600431bdd"
+  end
+
+  resource "Text-ANSI-Image" do
+    url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/Text-ANSI-Image-0.01.tar.gz"
+    sha256 "ae844f6c0015cea1e965243db3241eec86119aec0f7e487371fe6a7649835d5e"
   end
 
   resource "Text-ANSI-Printf" do
@@ -41,7 +47,7 @@ class AppAnsiTools < Formula
     end
 
     # Create wrapper scripts for all commands
-    %w[ansicolumn ansiecho ansifold ansicut ansicolrm ansiprintf].each do |cmd|
+    %w[ansicolumn ansiecho ansifold ansicut ansicolrm ansiprintf ansipic].each do |cmd|
       (bin/cmd).write <<~SH
         #!/bin/bash
         export PERL5LIB="#{libexec}/lib/perl5${PERL5LIB:+:$PERL5LIB}"
@@ -50,7 +56,7 @@ class AppAnsiTools < Formula
       (bin/cmd).chmod 0755
     end
 
-    man1.install Dir[libexec/"man/man1/{ansicolumn,ansiecho,ansifold,ansicut,ansicolrm,ansiprintf}.1"]
+    man1.install Dir[libexec/"man/man1/{ansicolumn,ansiecho,ansifold,ansicut,ansicolrm,ansiprintf,ansipic}.1"]
   end
 
   test do
@@ -58,5 +64,6 @@ class AppAnsiTools < Formula
     system bin/"ansiecho", "--version"
     system bin/"ansifold", "--version"
     system bin/"ansiprintf", "--version"
+    system bin/"ansipic", "--version"
   end
 end
