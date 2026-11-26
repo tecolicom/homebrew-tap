@@ -1,12 +1,9 @@
 class AppNup < Formula
   desc "n-up, multi-column paged output for commands and files"
   homepage "https://github.com/tecolicom/App-nup"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-1.24.tar.gz"
-  sha256 "d4b805ee79d6e0bf16cdbbaf631bf622668eaa57fa0ff6d4dd32e33b3acbf049"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-1.25.tar.gz"
+  sha256 "4178f36abdb299c1cf552852e4a0c5d16507f0fb137bca71cd21a266757c1af4"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
-  # rebuilt for App::ansicolumn 1.72, which keeps the rows of a table
-  # of mdee from being divided between panes
-  revision 2
 
   depends_on "autoconf" => :build
   depends_on "cpm"
