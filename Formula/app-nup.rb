@@ -4,9 +4,9 @@ class AppNup < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-nup-1.24.tar.gz"
   sha256 "d4b805ee79d6e0bf16cdbbaf631bf622668eaa57fa0ff6d4dd32e33b3acbf049"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
-  # rebuilt for App::ansicolumn 1.71, which keeps the rows of an image
-  # of mdee in one pane
-  revision 1
+  # rebuilt for App::ansicolumn 1.72, which keeps the rows of a table
+  # of mdee from being divided between panes
+  revision 2
 
   depends_on "autoconf" => :build
   depends_on "cpm"

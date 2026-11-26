@@ -1,11 +1,10 @@
 class AppAnsiTools < Formula
   desc "ANSI terminal sequence aware text processing tools"
   homepage "https://github.com/tecolicom"
-  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-ansicolumn-1.71.tar.gz"
-  version "1.710000"
-  sha256 "fe89e627dbdaba9c309e9e92a9d83e2732df5a7a31dbb427f4a51771aa814953"
+  url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-ansicolumn-1.72.tar.gz"
+  version "1.720000"
+  sha256 "9a2c128ff5c0ebd1b9e44b9b1dcac63e95df47e305a63f8893eaddfe27aa6f51"
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
-  revision 1
 
   depends_on "cpm"
 
@@ -20,8 +19,8 @@ class AppAnsiTools < Formula
   end
 
   resource "Text-ANSI-Image" do
-    url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/Text-ANSI-Image-0.01.tar.gz"
-    sha256 "ae844f6c0015cea1e965243db3241eec86119aec0f7e487371fe6a7649835d5e"
+    url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/Text-ANSI-Image-0.02.tar.gz"
+    sha256 "7a58cd3cb47bc41caf7238462a51cfcacc1f1ac93dd8dc78b3d9d7720ad9306f"
   end
 
   resource "Text-ANSI-Printf" do
