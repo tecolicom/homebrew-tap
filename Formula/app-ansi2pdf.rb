@@ -1,8 +1,8 @@
 class AppAnsi2pdf < Formula
   desc "Render terminal output with ANSI sequences to PDF"
   homepage "https://github.com/tecolicom/App-ansi2pdf"
-  url "https://github.com/tecolicom/App-ansi2pdf/archive/refs/tags/v0.3.0.tar.gz"
-  sha256 "180e70a9c79f3460a14cce97b1381c30a261d2730b0cc1a0f221138ec62ae1e3"
+  url "https://github.com/tecolicom/App-ansi2pdf/archive/refs/tags/v0.3.1.tar.gz"
+  sha256 "dbb21795650d844a0d6dfc484ab9188223d5eaf145b8f9a6e70fa8aaf9f133ac"
   license "MIT"
 
   depends_on "node"
