@@ -4,6 +4,7 @@ class AppAnsiTools < Formula
   url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/App-ansicolumn-1.73.tar.gz"
   version "1.730000"
   sha256 "b4b4df5d75509f0ba6b98624be3674c8b84cccb16797b7a5523d2af97337c6e4"
+  revision 1
   license any_of: ["Artistic-1.0-Perl", "GPL-1.0-or-later"]
 
   depends_on "cpm"
@@ -19,8 +20,8 @@ class AppAnsiTools < Formula
   end
 
   resource "Text-ANSI-Image" do
-    url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/Text-ANSI-Image-0.02.tar.gz"
-    sha256 "7a58cd3cb47bc41caf7238462a51cfcacc1f1ac93dd8dc78b3d9d7720ad9306f"
+    url "https://cpan.metacpan.org/authors/id/U/UT/UTASHIRO/Text-ANSI-Image-0.03.tar.gz"
+    sha256 "de20cdec22ba9cebdbbd07a4e3ba6e58edb56463693f2c7763e540e1dcc2e473"
   end
 
   resource "Text-ANSI-Printf" do
